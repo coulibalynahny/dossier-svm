@@ -5,7 +5,8 @@ library(shinythemes)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
-    shinythemes::themeSelector(),
+    # shinythemes::themeSelector(),
+    shinytheme("united"),
     
     titlePanel("SVM project on R Shiny"),
     actionButton("download","download"),
