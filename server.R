@@ -51,15 +51,15 @@ shinyServer(function(input, output) {
     
 
     output$tableDT2<-renderDT({
-           DT::datatable(table_prop,list(dom = 't'))
+         datatable(table_prop,list(dom = 't'))
     })
     
     output$tableDTt<-renderDT({
-        DT::datatable(tableex)
+        datatable(tableex)
     })
     
     output$tableDTs<-renderDT({
-        DT::datatable(stat,list(dom = 't'))
+        datatable(stat)
     })
     
     # table data.train

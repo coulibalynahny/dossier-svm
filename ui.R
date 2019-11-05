@@ -6,7 +6,7 @@ library(shinythemes)
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
     # shinythemes::themeSelector(),
-    shinytheme("united"),
+    theme=shinytheme(theme = "united"),
     
     titlePanel("SVM project on R Shiny"),
     actionButton("download","download"),
@@ -15,6 +15,11 @@ shinyUI(fluidPage(
            h4("our database contains the list of clients of a bank. 
               Customers can be categorized into two groups, which are customers in fraud situations and non-fraud customers."),
            h3("1.first view of the database"),
+           h4("the database contains 31 variables. the variable time, the variable amounts, 
+              the variable class and the 28 other variables are main components.
+              We present in the following table a small preview of our database. 
+              In this table we can see the variables time, amount, class and the first five main components"),
+           br(),
            dataTableOutput("tableDTt"),
            h3("2.some descriptive statistics"),
            dataTableOutput("tableDTs")
