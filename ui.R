@@ -67,8 +67,16 @@ shinyUI(fluidPage(
         
         #svm
         tabPanel("SVM",
+            
                  h1("SVM model"),
                  
+                 br(),
+                 h2("Theoretical Explanation of SVM "),
+                 h3("Introduction"),
+                 h4("Support vector machines (SVM), introduced by Vladimir Vapnik (Vapnik (1995, 1998)), are a set of supervised learning techniques designed to solve classification or regression problems.
+In the case of a classification problem, we are reffering to SVM (support vector machine) and in the case of a regression, we are reffering to SVR (support vector regression).
+For the presentation of the project, we will expose the classification problem (Fraud or Non-Fraud)
+SVMs are based on two key ideas:"),
                  h3("hyperparameters's choise"),
                  
                  sliderInput("cost.param","choice of cost parameters",
