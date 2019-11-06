@@ -14,7 +14,11 @@ library(DT)
 library(ggplot2)
 library(plotly)
 
+<<<<<<< HEAD
 DT=read.csv("C:/Users/nahny/Documents/GitHub/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+=======
+DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+>>>>>>> ef10eb7d104b21b358202e7748ce73a6d92ad55a
 
 
 DT$Amount=as.vector(scale(DT$Amount))
