@@ -135,7 +135,9 @@ shinyServer(function(input, output) {
         mlr::generateFilterValuesData(task=train.task(),method="FSelectorRcpp_information.gain")
     })
     
-    output$filtre <- renderPlot({ mlr::plotFilterValues(filter.kruskal(),n.show=10)
+    output$filtre <- renderPlotly({ 
+        des=mlr::plotFilterValues(filter.kruskal(),n.show=10)
+        plotly_build(des)
     }) 
     
     
@@ -266,7 +268,7 @@ shinyServer(function(input, output) {
     
     output$graph2.svm <- renderPlot({
         # plotROCCurves(df(), measures = list(tnr, tpr), diagonal = FALSE)
-        ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="orange")+theme_dark()+
+        ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="orange")+theme_bw()+
             xlab("True negative rate")+ylab("True positive rate")
     
     })

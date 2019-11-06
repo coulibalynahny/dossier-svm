@@ -52,11 +52,13 @@ shinyUI(fluidPage(
                  
                  sliderInput("under","undersampling non fraud case",
                              50,100,value=80,round = T),
+                 br(),
                  
                  h4("Distribution of Class in the Smote data sets"),
                  dataTableOutput("tableSmote"),
+                 br(),
                  # verbatimTextOutput("tableSmote"),
-                 plotOutput("filtre")
+                 plotlyOutput("filtre")
                  
                  
         ),
@@ -64,29 +66,6 @@ shinyUI(fluidPage(
     
     navlistPanel(
         "list of models to test",
-        
-        
-        #logistic regression
-        tabPanel("logistic regression",
-                 h2("logistic regression model"),
-                 
-                 
-                 h4("confusion matrix"),
-                 verbatimTextOutput("matrix.lg"),
-                 
-                 h4("ROC measures"),
-                 verbatimTextOutput("roc.lg"),
-                 
-                 h4("Precision/recall graph"),
-                 plotOutput("graph1.lg"),
-                 
-                 h4("Sensitivity/specificity graph"),
-                 plotOutput("graph2.lg"),
-                 
-                 h4("roc curve"),
-                 plotOutput("graph3.lg")
-                 
-        ),
         
         
         
@@ -129,6 +108,27 @@ SVMs are based on two key ideas:"),
                  
         ),
         
+        #logistic regression
+        tabPanel("logistic regression",
+                 h2("logistic regression model"),
+                 
+                 
+                 h4("confusion matrix"),
+                 verbatimTextOutput("matrix.lg"),
+                 
+                 h4("ROC measures"),
+                 verbatimTextOutput("roc.lg"),
+                 
+                 h4("Precision/recall graph"),
+                 plotOutput("graph1.lg"),
+                 
+                 h4("Sensitivity/specificity graph"),
+                 plotOutput("graph2.lg"),
+                 
+                 h4("roc curve"),
+                 plotOutput("graph3.lg")
+                 
+        ),
         # decision tree
         tabPanel("decision tree",
                  h1("decision tree"),
