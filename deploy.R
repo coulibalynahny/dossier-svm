@@ -1,7 +1,8 @@
 library(rsconnect)
 
-setAccountInfo(name   = Sys.getenv("shinyapps_name"),
-               token  = Sys.getenv("shinyapps_token"),
-               secret = Sys.getenv("shinyapps_secret"))
+setAccountInfo(name   = Sys.getenv("coulibalynahny"),
+               token  = Sys.getenv("31EB9850B4552BA87AAE54C242E30F89"),
+               secret = Sys.getenv("<SECRET>"))
 
 deployApp()
+

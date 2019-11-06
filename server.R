@@ -14,7 +14,7 @@ library(DT)
 library(ggplot2)
 library(plotly)
 
-DT=read.csv("C:/Users/nahny/OneDrive/Bureau/master ESA/master 2 ESA/SVM/creditcard.csv", stringsAsFactors = FALSE )
+DT=read.csv("C:/Users/nahny/Documents/GitHub/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
 
 
 DT$Amount=as.vector(scale(DT$Amount))
@@ -182,7 +182,7 @@ shinyServer(function(input, output) {
     
     output$graph2.svm <- renderPlot({
         # plotROCCurves(df(), measures = list(tnr, tpr), diagonal = FALSE)
-        ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="orange")+theme_bw()+
+        ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="orange")+theme_dark()+
             xlab("True negative rate")+ylab("True positive rate")
     
     })
