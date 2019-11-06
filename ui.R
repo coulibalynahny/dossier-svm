@@ -77,6 +77,7 @@ shinyUI(fluidPage(
 In the case of a classification problem, we are reffering to SVM (support vector machine) and in the case of a regression, we are reffering to SVR (support vector regression).
 For the presentation of the project, we will expose the classification problem (Fraud or Non-Fraud)
 SVMs are based on two key ideas:"),
+                 h3("1. The notion of maximum margin,2.The notion of kernel function"),
                  h3("hyperparameters's choise"),
                  
                  sliderInput("cost.param","choice of cost parameters",
