@@ -14,19 +14,17 @@ library(DT)
 library(ggplot2)
 library(plotly)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 DT=read.csv("C:/Users/nahny/Documents/GitHub/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
-=======
-DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
->>>>>>> ef10eb7d104b21b358202e7748ce73a6d92ad55a
-=======
-
-DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
-
-#DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
-
->>>>>>> 321309851f07192a13fa9553f5d631958377a61a
+# =======
+# DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+# >>>>>>> ef10eb7d104b21b358202e7748ce73a6d92ad55a
+# =======
+# 
+# DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
+# 
+# #DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+# 
+# >>>>>>> 321309851f07192a13fa9553f5d631958377a61a
 
 
 DT$Amount=as.vector(scale(DT$Amount))
@@ -47,6 +45,17 @@ data.train = as.data.frame(DT[inTrain,])
 data.test = as.data.frame(DT[-inTrain,])
 
 
+tab1=prop.table(table(data.train$Class))
+tab=table(data.train$Class)
+mat=rbind(tab,tab1)
+row.names(mat)<-c("Number","Proportion (in %)")
+mat[2,]<-round(mat[2,],4)*100
+ 
+# TClass <- factor(c("non fraud", "non fraud", "fraud", "fraud"))
+# PClass <- factor(c("non fraud", "fraud", "non fraud", "fraud"))
+# df <- as.data.frame(TClass, PClass, mat)
+
+
 shinyServer(function(input, output) {
     
     # on reequilibre l'echantillon train avec smote, on definit un echantillon nomé data.smote
@@ -55,6 +64,7 @@ shinyServer(function(input, output) {
                             perc.under = input$under))
         
     }) 
+    
     # table dt  
     #output$tableDT1 <- renderPrint({
        # table(DT$Class)
@@ -77,18 +87,32 @@ shinyServer(function(input, output) {
     })
     
     # table data.train
-    output$tabletrain1 <- renderPrint({
-        table(data.train$Class)
+    output$tabletrain1 <- renderDT({
+        # 
+        # ggplot(data =  df, mapping = aes(x = TClass, y = PClass)) +
+        #     geom_tile(aes(fill = mat), colour = "white") +
+        #     geom_text(aes(label = sprintf("%1.0f", Y)), vjust = 1) +
+        #     scale_fill_gradient(low = "blue", high = "red") +
+        #     theme_bw() + theme(legend.position = "none")
+        DT::datatable(mat,list(dom = 't'))
+       
     })
-    output$tabletrain <- renderPrint({
-        prop.table(table(data.train$Class))
-    })
+    #output$tabletrain <- renderPrint({
+    #     prop.table(table(data.train$Class))
+    # })
     # table data.smote
-    output$tableSmote1 <- renderPrint({
-        table(data.smote()$Class)
-    })
-    output$tableSmote <- renderPrint({
-        prop.table(table(data.smote()$Class))
+    # output$tableSmote1 <- renderPrint({
+    #     table(data.smote()$Class)
+    # })
+    output$tableSmote <- renderDT({
+        
+        ab=table(data.smote()$Class)
+        ab1= prop.table(table(data.smote()$Class))
+        at=rbind(ab,ab1)
+        row.names(at)<-c("Number","Proportion (in %)")
+        at[2,]<-round(at[2,],4)*100
+        
+        DT::datatable(at,list(dom = 't'))
     })
     
     ###############################################################################
@@ -252,11 +276,6 @@ shinyServer(function(input, output) {
          ggplot(df()$data)+geom_line(aes(x=fpr,y=tpr),color="green",size=0.6)+theme_bw()+
              xlab("false positive rate")+ylab("True positive rate")
     })
-    
-    
-    
-    
-    
     
     
     

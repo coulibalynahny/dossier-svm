@@ -38,9 +38,9 @@ shinyUI(fluidPage(
               We have 99.83% of non fraud and 0.17% of fraud. before any modeling, we will rebalance the database to implement the calculations more easily"),
                  
                  h3("Distribution of Class in the training database"),
-                 verbatimTextOutput("tabletrain1"),
-                 verbatimTextOutput("tabletrain"),
-                 
+                 dataTableOutput("tabletrain1"),
+                 # verbatimTextOutput("tabletrain"),
+                 # 
                  h3("Rebalancing training database using Smote"),
                  
                  sliderInput("ksmote","number of nearest neighbours that are used 
@@ -54,8 +54,8 @@ shinyUI(fluidPage(
                              50,100,value=80,round = T),
                  
                  h4("Distribution of Class in the Smote data sets"),
-                 verbatimTextOutput("tableSmote1"),
-                 verbatimTextOutput("tableSmote"),
+                 dataTableOutput("tableSmote"),
+                 # verbatimTextOutput("tableSmote"),
                  plotOutput("filtre")
                  
                  
