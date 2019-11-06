@@ -11,6 +11,8 @@ library(FSelectorRcpp)
 library(randomForest)
 library(data.table)
 library(DT)
+library(ggplot2)
+library(plotly)
 
 DT=read.csv("C:/Users/nahny/OneDrive/Bureau/master ESA/master 2 ESA/SVM/creditcard.csv", stringsAsFactors = FALSE )
 
@@ -51,15 +53,15 @@ shinyServer(function(input, output) {
     
 
     output$tableDT2<-renderDT({
-         datatable(table_prop,list(dom = 't'))
+         DT::datatable(table_prop,list(dom = 't'))
     })
     
     output$tableDTt<-renderDT({
-        datatable(tableex)
+        DT::datatable(tableex)
     })
     
     output$tableDTs<-renderDT({
-        datatable(stat)
+        DT::datatable(stat)
     })
     
     # table data.train
@@ -161,7 +163,7 @@ shinyServer(function(input, output) {
     
     output$graph1.svm <- renderPlot({
          #plotROCCurves(df(), measures = list(tpr, ppv), diagonal = FALSE)
-         ggplot(df()$data)+geom_line(aes(x=tpr,y=ppv),color="blue",size=0.6)+theme_minimal()+
+         ggplot(df()$data)+geom_line(aes(x=tpr,y=ppv),color="blue")+theme_bw()+
         xlab("True positive rate")+ylab("Positive predict rate")
      })
     
@@ -180,13 +182,14 @@ shinyServer(function(input, output) {
     
     output$graph2.svm <- renderPlot({
         # plotROCCurves(df(), measures = list(tnr, tpr), diagonal = FALSE)
-        ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="orange",size=0.6)+theme_minimal()+
+        ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="orange")+theme_bw()+
             xlab("True negative rate")+ylab("True positive rate")
+    
     })
     
      output$graph3.svm <- renderPlot({
     #     plotROCCurves(df(), measures = list(fpr, tpr), diagonal = TRUE)
-         ggplot(df()$data)+geom_line(aes(x=fpr,y=tpr),color="green",size=0.6)+theme_minimal()+
+         ggplot(df()$data)+geom_line(aes(x=fpr,y=tpr),color="green",size=0.6)+theme_bw()+
              xlab("false positive rate")+ylab("True positive rate")
     })
     

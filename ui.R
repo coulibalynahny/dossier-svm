@@ -6,6 +6,7 @@ library(shinythemes)
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
     # shinythemes::themeSelector(),
+    #missmap
     theme=shinytheme(theme = "united"),
     
     titlePanel("SVM project on R Shiny"),
@@ -105,7 +106,7 @@ shinyUI(fluidPage(
         ),
         #random forest
         tabPanel("random forest",
-                 h2("random forest model"),
+                 h1("random forest model"),
                  
                  h3("choice of hyperparameters"),
                  
@@ -131,10 +132,13 @@ shinyUI(fluidPage(
                  plotOutput("graph3.rf")
                  
         ),
+        tabPanel("logistic model",
+                 h1("logistic model")
+                 ),
         
         # model comparision
         tabPanel("model comparison",
-                 h2("comparison of different models"),
+                 h1("comparison of different models"),
                  h5("We chose to re-sample the model in two ways that are: k-fold and holdout. "),
                  h4("resampling using k-fold method"),
                  sliderInput("k","chose your K ",0,10,value=5,round = T),
@@ -154,6 +158,7 @@ shinyUI(fluidPage(
                  plotOutput("bmrplot")
                  
         )
+        
         
         
     )))
