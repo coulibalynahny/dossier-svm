@@ -14,7 +14,7 @@ library(DT)
 library(ggplot2)
 library(plotly)
 
-DT=read.csv("C:/Users/nahny/OneDrive/Bureau/master ESA/master 2 ESA/SVM/creditcard.csv", stringsAsFactors = FALSE )
+DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
 
 
 DT$Amount=as.vector(scale(DT$Amount))
@@ -101,6 +101,54 @@ shinyServer(function(input, output) {
     
     output$filtre <- renderPlot({ mlr::plotFilterValues(filter.kruskal(),n.show=10)
     }) 
+    
+    
+    #logistic regression 
+    train.lg <- reactive({ 
+        
+        learner.lg <- makeLearner(cl="classif.logreg",predict.type="prob")
+        
+        
+        train.lg <- mlr::train(learner.lg,train.task())
+        
+        return(train.lg)
+    }) 
+    
+    
+    pred.lg <- reactive({ 
+        predict(train.lg(),test.task())
+    }) 
+    
+    
+    output$matrix.lg <- renderPrint({
+        calculateConfusionMatrix(pred.lg(),relative = TRUE)
+    })
+    
+    output$roc.lg <- renderPrint({
+        calculateROCMeasures(pred.lg())
+    })
+    
+    
+    df.lg <- reactive({ generateThreshVsPerfData(pred.lg(),
+                                                 measures = list(fpr, tpr, ppv, tnr,mmce))
+    })
+    
+    
+    output$graph1.lg <- renderPlot({
+        plotROCCurves(df.lg(), measures = list(tpr, ppv), diagonal = FALSE)
+    })
+    
+    output$graph2.lg <- renderPlot({
+        plotROCCurves(df.lg(), measures = list(tnr, tpr), diagonal = FALSE)
+    })
+    
+    output$graph3.lg <- renderPlot({
+        plotROCCurves(df.lg(), measures = list(fpr, tpr), diagonal = TRUE)
+    })
+    
+    
+    
+    
     
     #arbre de decision 
     train.tree <- reactive({ 
