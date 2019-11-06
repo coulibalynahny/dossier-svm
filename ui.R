@@ -65,6 +65,32 @@ shinyUI(fluidPage(
     navlistPanel(
         "list of models to test",
         
+        
+        #logistic regression
+        tabPanel("logistic regression",
+                 h2("logistic regression model"),
+                 
+                 
+                 h4("confusion matrix"),
+                 verbatimTextOutput("matrix.lg"),
+                 
+                 h4("ROC measures"),
+                 verbatimTextOutput("roc.lg"),
+                 
+                 h4("Precision/recall graph"),
+                 plotOutput("graph1.lg"),
+                 
+                 h4("Sensitivity/specificity graph"),
+                 plotOutput("graph2.lg"),
+                 
+                 h4("roc curve"),
+                 plotOutput("graph3.lg")
+                 
+        ),
+        
+        
+        
+        
         #svm
         tabPanel("SVM",
             
@@ -109,10 +135,27 @@ SVMs are based on two key ideas:"),
                  h5("construction of the decision tree"),
                  plotOutput("tree"),
                  h3("the result analysis"),
+                 
                  h4("confusion matrix"),
-                 verbatimTextOutput("matrix.tree")
+                 verbatimTextOutput("matrix.tree"),
+                 
+                 h4("ROC measures"),
+                 verbatimTextOutput("roc.tree"),
+                 
+                 h4("Precision/recall graph"),
+                 plotOutput("graph1.tree"),
+                 
+                 h4("Sensitivity/specificity graph"),
+                 plotOutput("graph2.tree"),
+                 
+                 h4("roc curve"),
+                 plotOutput("graph3.tree")
                  
         ),
+        
+        
+        
+        
         #random forest
         tabPanel("random forest",
                  h1("random forest model"),
@@ -141,10 +184,7 @@ SVMs are based on two key ideas:"),
                  plotOutput("graph3.rf")
                  
         ),
-        tabPanel("logistic model",
-                 h1("logistic model")
-                 ),
-        
+      
         # model comparision
         tabPanel("model comparison",
                  h1("comparison of different models"),

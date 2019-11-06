@@ -15,10 +15,18 @@ library(ggplot2)
 library(plotly)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 DT=read.csv("C:/Users/nahny/Documents/GitHub/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
 =======
 DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
 >>>>>>> ef10eb7d104b21b358202e7748ce73a6d92ad55a
+=======
+
+DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
+
+#DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+
+>>>>>>> 321309851f07192a13fa9553f5d631958377a61a
 
 
 DT$Amount=as.vector(scale(DT$Amount))
@@ -105,6 +113,54 @@ shinyServer(function(input, output) {
     
     output$filtre <- renderPlot({ mlr::plotFilterValues(filter.kruskal(),n.show=10)
     }) 
+    
+    
+    #logistic regression 
+    train.lg <- reactive({ 
+        
+        learner.lg <- makeLearner(cl="classif.logreg",predict.type="prob")
+        
+        
+        train.lg <- mlr::train(learner.lg,train.task())
+        
+        return(train.lg)
+    }) 
+    
+    
+    pred.lg <- reactive({ 
+        predict(train.lg(),test.task())
+    }) 
+    
+    
+    output$matrix.lg <- renderPrint({
+        calculateConfusionMatrix(pred.lg(),relative = TRUE)
+    })
+    
+    output$roc.lg <- renderPrint({
+        calculateROCMeasures(pred.lg())
+    })
+    
+    
+    df.lg <- reactive({ generateThreshVsPerfData(pred.lg(),
+                                                 measures = list(fpr, tpr, ppv, tnr,mmce))
+    })
+    
+    
+    output$graph1.lg <- renderPlot({
+        plotROCCurves(df.lg(), measures = list(tpr, ppv), diagonal = FALSE)
+    })
+    
+    output$graph2.lg <- renderPlot({
+        plotROCCurves(df.lg(), measures = list(tnr, tpr), diagonal = FALSE)
+    })
+    
+    output$graph3.lg <- renderPlot({
+        plotROCCurves(df.lg(), measures = list(fpr, tpr), diagonal = TRUE)
+    })
+    
+    
+    
+    
     
     #arbre de decision 
     train.tree <- reactive({ 
