@@ -6,7 +6,7 @@ library(rpart)
 library(rpart.plot)
 library(e1071)
 library(caret)
-library(DMwR)
+library(smotefamily)
 library(FSelectorRcpp)
 library(randomForest)
 library(data.table)
@@ -14,17 +14,13 @@ library(DT)
 library(ggplot2)
 library(plotly)
 
-DT=read.csv("C:/Users/nahny/Documents/GitHub/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
-# =======
+# chemin d'acces
+
+#DT=read.csv("C:/Users/nahny/Documents/GitHub/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+
 # DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
-# >>>>>>> ef10eb7d104b21b358202e7748ce73a6d92ad55a
-# =======
-# 
+
 # DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
-# 
-# #DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
-# 
-# >>>>>>> 321309851f07192a13fa9553f5d631958377a61a
 
 
 DT$Amount=as.vector(scale(DT$Amount))
@@ -32,6 +28,8 @@ DT$Time=as.vector(scale(DT$Time))
 DT$Class=as.factor(DT$Class)
 levels(DT$Class)[1] <- "nonFraud"
 levels(DT$Class)[2] <- "Fraud"
+
+
 table_prop<-rbind(table(DT$Class),prop.table(table(DT$Class)))
 row.names(table_prop)<-c("Number","Proportion (in %)")
 table_prop[2,]<-round(table_prop[2,],4)*100
@@ -39,41 +37,16 @@ tableex=DT[1:100,c(1,2,3,4,5,6,30,31)]
 stat=summary(DT[,-31])
 
 
-set.seed(1234)
-inTrain = createDataPartition(DT$Class, p = 0.7,list=FALSE)
-data.train = as.data.frame(DT[inTrain,])  
-data.test = as.data.frame(DT[-inTrain,])
-
-
-tab1=prop.table(table(data.train$Class))
-tab=table(data.train$Class)
+tab1=prop.table(table(DT$Class))
+tab=table(DT$Class)
 mat=rbind(tab,tab1)
 row.names(mat)<-c("Number","Proportion (in %)")
 mat[2,]<-round(mat[2,],4)*100
  
-# TClass <- factor(c("non fraud", "non fraud", "fraud", "fraud"))
-# PClass <- factor(c("non fraud", "fraud", "non fraud", "fraud"))
-# df <- as.data.frame(TClass, PClass, mat)
-
 
 shinyServer(function(input, output) {
     
-    # on reequilibre l'echantillon train avec smote, on definit un echantillon nomé data.smote
-    data.smote <- reactive({ 
-        as.data.frame(SMOTE(Class ~., data.train, perc.over = input$over, k = input$ksmote,
-                            perc.under = input$under))
-        
-    }) 
-    
-    # table dt  
-    #output$tableDT1 <- renderPrint({
-       # table(DT$Class)
-    #})
-    #output$tableDT <- renderPrint({
-        #prop.table(table(DT$Class))
-    #})
-    
-
+    ## PARTIR NAHNY
     output$tableDT2<-renderDT({
          DT::datatable(table_prop,list(dom = 't'))
     })
@@ -86,34 +59,46 @@ shinyServer(function(input, output) {
         DT::datatable(stat)
     })
     
-    # table data.train
-    output$tabletrain1 <- renderDT({
-        # 
-        # ggplot(data =  df, mapping = aes(x = TClass, y = PClass)) +
-        #     geom_tile(aes(fill = mat), colour = "white") +
-        #     geom_text(aes(label = sprintf("%1.0f", Y)), vjust = 1) +
-        #     scale_fill_gradient(low = "blue", high = "red") +
-        #     theme_bw() + theme(legend.position = "none")
-        DT::datatable(mat,list(dom = 't'))
-       
-    })
-    #output$tabletrain <- renderPrint({
-    #     prop.table(table(data.train$Class))
-    # })
-    # table data.smote
-    # output$tableSmote1 <- renderPrint({
-    #     table(data.smote()$Class)
-    # })
+    # table DT
+    output$tabletrain1 <- renderDT({ DT::datatable(mat,list(dom = 't')) })
+  
+    # creation of smote database 
+    DT.smote <- reactive({
+        DT.smote=smotefamily::SMOTE(DT[,-31], DT[,31], K = input$kn, 
+                                    dup_size = input$prop)$data
+        names(DT.smote)[31]="Class"
+        s=sample(1:nrow(DT.smote),input$size)
+        DT.smote=DT.smote[s,]
+        return(DT.smote)
+    }) 
+    
     output$tableSmote <- renderDT({
         
-        ab=table(data.smote()$Class)
-        ab1= prop.table(table(data.smote()$Class))
+        ab=table(DT.smote()$Class)
+        ab1= prop.table(table(DT.smote()$Class))
         at=rbind(ab,ab1)
         row.names(at)<-c("Number","Proportion (in %)")
         at[2,]<-round(at[2,],4)*100
         
         DT::datatable(at,list(dom = 't'))
     })
+    
+    
+    
+    # table data.train
+    output$smote <- renderPrint({
+        table(DT.smote()$Class)
+    })
+    output$smote.prop <- renderPrint({
+        prop.table(table(DT.smote()$Class))
+    })
+    
+    
+    # splitting train (70%) / test (30%)
+    inTrain <- reactive({ createDataPartition(DT.smote()$Class, p = 0.7,list=FALSE) }) 
+    data.train <- reactive({ DT.smote()[inTrain(),]  }) 
+    data.test <- reactive({ DT.smote()[-inTrain(),]  }) 
+    
     
     ###############################################################################
     # MODELISATION
@@ -124,19 +109,20 @@ shinyServer(function(input, output) {
     # dans le package mlr on definit une tache qui permet de specifier une fois pour toute le probleme que nous traitons
     #cest a dire la base de donee utilisee, la variable cible et la modalite cible
     train.task <- reactive({
-        makeClassifTask(data=data.smote(),target="Class",positive = "Fraud")
+        makeClassifTask(data=data.test(),target="Class",positive = "Fraud")
     })
     
     test.task <- reactive({
-        makeClassifTask(data=data.test,target="Class",positive = "Fraud")
+        makeClassifTask(data=data.test(),target="Class",positive = "Fraud")
     })
     
-    filter.kruskal <- reactive({
-        mlr::generateFilterValuesData(task=train.task(),method="FSelectorRcpp_information.gain")
+    filter <- reactive({
+        mlr::generateFilterValuesData(task=train.task(),
+                                      method="FSelectorRcpp_information.gain")
     })
     
     output$filtre <- renderPlotly({ 
-        des=mlr::plotFilterValues(filter.kruskal(),n.show=10)
+        des=mlr::plotFilterValues(filter(),n.show=10)
         plotly_build(des)
     }) 
     
@@ -226,6 +212,37 @@ shinyServer(function(input, output) {
     output$matrix.tree <- renderPrint({
         calculateConfusionMatrix(pred.tree(),relative = TRUE)
     })
+    output$roc.tree <- renderPrint({
+        calculateROCMeasures(pred.tree())
+    })
+    
+    
+    df.tree <- reactive({ generateThreshVsPerfData(pred.tree(),
+                                                 measures = list(fpr, tpr, ppv, tnr,mmce))
+    })
+    
+    
+    output$graph1.tree <- renderPlotly({
+        # plotROCCurves(df.tree(), measures = list(tpr, ppv), diagonal = FALSE)
+        pp=ggplot(df.tree()$data)+geom_line(aes(x=tpr,y=ppv),color="blue")+theme_bw()
+        plotly_build(pp)
+        
+    })
+    
+    output$graph2.tree <- renderPlotly({
+        # plotROCCurves(df.tree(), measures = list(tnr, tpr), diagonal = FALSE)
+        bbp= ggplot(df.tree()$data)+geom_line(aes(x=tnr,y=tpr),color="blue")+theme_bw()
+        plotly_build(bbp)
+    })
+    
+    output$graph3.tree <- renderPlotly({
+        # plotROCCurves(df.tree()$data, measures = list(fpr, tpr), diagonal = TRUE)
+        tt=ggplot(df.tree()$data)+geom_line(aes(x=fpr,y=tpr),color="blue")+theme_bw()
+        plotly_build(tt)
+    })
+    
+    
+    
     
     
     #svm 

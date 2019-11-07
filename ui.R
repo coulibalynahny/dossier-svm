@@ -30,38 +30,48 @@ shinyUI(fluidPage(
         h2("II.rebalance database",
                  
                  h3("Class distribution in the Original database"),
-                 #verbatimTextOutput("tableDT1"),
-                 #verbatimTextOutput("tableDT"),
                  dataTableOutput("tableDT2"),
                  h4("our database contains a total of 284808 observations including 
               492 observations for individuals in a fraud situation and the rest for individuals in non-fraud situations. Which allows us to notice that our database is not balanced. 
               We have 99.83% of non fraud and 0.17% of fraud. before any modeling, we will rebalance the database to implement the calculations more easily"),
                  
-                 h3("Distribution of Class in the training database"),
-                 dataTableOutput("tabletrain1"),
-                 # verbatimTextOutput("tabletrain"),
-                 # 
-                 h3("Rebalancing training database using Smote"),
-                 
-                 sliderInput("ksmote","number of nearest neighbours that are used 
-                             to generate the new examples of fraud",
-                             3,10,value=5),
-                 
-                 sliderInput("over","oversampling fraud case",
-                             100,1000,value=500,round = T),
-                 
-                 sliderInput("under","undersampling non fraud case",
-                             50,100,value=80,round = T),
-                 br(),
-                 
-                 h4("Distribution of Class in the Smote data sets"),
-                 dataTableOutput("tableSmote"),
-                 br(),
-                 # verbatimTextOutput("tableSmote"),
-                 plotlyOutput("filtre")
-                 
-                 
+           
+           ###################################################################
+           # debut modifications !!!!
+           
+           h3("Distribution of Class in the SMOTE database"),
+           h4("Machine learning algorithms have trouble learning when one class heavily
+                dominates the other.
+                So we create a new rebalanced datasets using SMOTE 
+                    :Synthetic Minority Over-sampling Technique."),    
+           "SMOTE synthesises new minority instances between existing (real) minority instances.",
+           
+           sliderInput("size","Choose Smote sample size",
+                       1000,10000,value=5000,round = T),
+           
+           sliderInput("kn","Number of the closest neighbours are considered for synthesis
+                             new cases of fraud",
+                       3,10,value=5),
+           sliderInput("prop","Number of times existing data points get reused for 
+                             synthesis new cases of fraud",
+                       50,100,value=50,round = T),
+           h4("Proportion of Fraud/NonFraud"),
+           verbatimTextOutput("smote.prop"),
+           
+           h4("Number of Fraud/NonFraud"),
+           verbatimTextOutput("smote"),
+           
+           
+           h4("Features selection"),
+           "Entropy-based Filters: Algorithms that find ranks of importance of 
+           discrete attributes, basing on their entropy with a continous class attribute",
+           plotOutput("filtre")
+           
+           
         ),
+    ###################
+    # fin des modifications !!!!!
+    
                 h2("III.the models"),
     
     navlistPanel(
