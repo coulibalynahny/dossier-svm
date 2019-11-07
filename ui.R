@@ -82,6 +82,7 @@ shinyUI(fluidPage(
 In the case of a classification problem, we are reffering to SVM (support vector machine) and in the case of a regression, we are reffering to SVR (support vector regression).
 For the presentation of the project, we will expose the classification problem (Fraud or Non-Fraud)
 SVMs are based on two key ideas:"),
+                 br(),
                  h3("1. The notion of maximum margin,2.The notion of kernel function"),
                  h3("hyperparameters's choise"),
                  
@@ -98,13 +99,13 @@ SVMs are based on two key ideas:"),
                  verbatimTextOutput("roc.svm"),
                  
                  h4("Precision/recall graph"),
-                 plotOutput("graph1.svm"),
+                 plotlyOutput("graph1.svm"),
                  
                  h4("Sensitivity/specificity graph"),
-                 plotOutput("graph2.svm"),
+                 plotlyOutput("graph2.svm"),
                  
                  h4("roc curve"),
-                 plotOutput("graph3.svm")
+                 plotlyOutput("graph3.svm")
                  
         ),
         
@@ -120,13 +121,13 @@ SVMs are based on two key ideas:"),
                  verbatimTextOutput("roc.lg"),
                  
                  h4("Precision/recall graph"),
-                 plotOutput("graph1.lg"),
+                 plotlyOutput("graph1.lg"),
                  
                  h4("Sensitivity/specificity graph"),
-                 plotOutput("graph2.lg"),
+                 plotlyOutput("graph2.lg"),
                  
                  h4("roc curve"),
-                 plotOutput("graph3.lg")
+                 plotlyOutput("graph3.lg")
                  
         ),
         # decision tree
@@ -143,13 +144,13 @@ SVMs are based on two key ideas:"),
                  verbatimTextOutput("roc.tree"),
                  
                  h4("Precision/recall graph"),
-                 plotOutput("graph1.tree"),
+                 plotlyOutput("graph1.tree"),
                  
                  h4("Sensitivity/specificity graph"),
-                 plotOutput("graph2.tree"),
+                 plotlyOutput("graph2.tree"),
                  
                  h4("roc curve"),
-                 plotOutput("graph3.tree")
+                 plotlyOutput("graph3.tree")
                  
         ),
         
@@ -175,13 +176,13 @@ SVMs are based on two key ideas:"),
                  verbatimTextOutput("roc.rf"),
                  
                  h4("Precision/recall graph"),
-                 plotOutput("graph1.rf"),
+                 plotlyOutput("graph1.rf"),
                  
                  h4("Sensitivity/specificity graph"),
-                 plotOutput("graph2.rf"),
+                 plotlyOutput("graph2.rf"),
                  
                  h4("roc curve"),
-                 plotOutput("graph3.rf")
+                 plotlyOutput("graph3.rf")
                  
         ),
       
@@ -194,13 +195,15 @@ SVMs are based on two key ideas:"),
                  verbatimTextOutput("bmr1"),
                  
                  h4("Precision/recall graph"),
-                 plotOutput("graph1.bmr"),
+                 plotlyOutput("graph1.bmr"),
                  
                  h4("Sensitivity/specificity graph"),
-                 plotOutput("graph2.bmr"),
+                 plotlyOutput("graph2.bmr"),
                  
                  h4("roc curve"),
-                 plotOutput("graph3.bmr"),
+                 plotlyOutput("graph3.bmr"),
+                 # 
+                 # plotOutput("bmri"),
                  
                  h4("distribution of performance values across resampling iterations for
                     one performance measure and for all learners"),

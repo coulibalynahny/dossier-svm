@@ -172,16 +172,28 @@ shinyServer(function(input, output) {
     })
     
     
-    output$graph1.lg <- renderPlot({
-        plotROCCurves(df.lg(), measures = list(tpr, ppv), diagonal = FALSE)
+    output$graph1.lg <- renderPlotly({
+        #plotROCCurves(df.lg(), measures = list(tpr, ppv), diagonal = FALSE)
+        pli1=ggplot(df.lg()$data)+geom_line(aes(x=tpr,y=ppv),color="orange")+theme_bw()+
+            xlab("True positive rate")+ylab("positive predict rate")
+        plotly_build(pli1)
+        
     })
     
-    output$graph2.lg <- renderPlot({
-        plotROCCurves(df.lg(), measures = list(tnr, tpr), diagonal = FALSE)
+    output$graph2.lg <- renderPlotly({
+        #plotROCCurves(df.lg(), measures = list(tnr, tpr), diagonal = FALSE)
+        pli2=ggplot(df.lg()$data)+geom_line(aes(x=tnr,y=tpr),color="orange")+theme_bw()+
+            xlab("True negative rate")+ylab("True positive rate")
+        plotly_build(pli2)
+        
     })
     
-    output$graph3.lg <- renderPlot({
-        plotROCCurves(df.lg(), measures = list(fpr, tpr), diagonal = TRUE)
+    output$graph3.lg <- renderPlotly({
+        #plotROCCurves(df.lg(), measures = list(fpr, tpr), diagonal = TRUE)
+        pli3=ggplot(df.lg()$data)+geom_line(aes(x=fpr,y=tpr),color="orange")+theme_bw()+
+            xlab("False positive rate")+ylab("True positive rate")
+        plotly_build(pli3)
+        
     })
     
     
@@ -247,10 +259,12 @@ shinyServer(function(input, output) {
     })
     
     
-    output$graph1.svm <- renderPlot({
+    output$graph1.svm <- renderPlotly({
          #plotROCCurves(df(), measures = list(tpr, ppv), diagonal = FALSE)
-         ggplot(df()$data)+geom_line(aes(x=tpr,y=ppv),color="blue")+theme_bw()+
+         plo1=ggplot(df()$data)+geom_line(aes(x=tpr,y=ppv),color="dark green")+theme_bw()+
         xlab("True positive rate")+ylab("Positive predict rate")
+         plotly_build(plo1)
+        
      })
     
 #     output$graph1.svm <- renderPlot({
@@ -266,17 +280,19 @@ shinyServer(function(input, output) {
 #              xlab("True positive rate")+ylab("Positive predict rate")
 #     })
     
-    output$graph2.svm <- renderPlot({
+    output$graph2.svm <- renderPlotly({
         # plotROCCurves(df(), measures = list(tnr, tpr), diagonal = FALSE)
-        ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="orange")+theme_bw()+
+        plo2=ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="dark green")+theme_bw()+
             xlab("True negative rate")+ylab("True positive rate")
+        plotly_build(plo2)
     
     })
     
-     output$graph3.svm <- renderPlot({
+     output$graph3.svm <- renderPlotly({
     #     plotROCCurves(df(), measures = list(fpr, tpr), diagonal = TRUE)
-         ggplot(df()$data)+geom_line(aes(x=fpr,y=tpr),color="green",size=0.6)+theme_bw()+
+         plo3=ggplot(df()$data)+geom_line(aes(x=fpr,y=tpr),color="dark green")+theme_bw()+
              xlab("false positive rate")+ylab("True positive rate")
+         plotly_build(plo3)
     })
     
     
@@ -313,16 +329,23 @@ shinyServer(function(input, output) {
     })
     
     
-    output$graph1.rf <- renderPlot({
-        plotROCCurves(df.rf(), measures = list(tpr, ppv), diagonal = FALSE)
+    output$graph1.rf <- renderPlotly({
+       # plotROCCurves(df.rf(), measures = list(tpr, ppv), diagonal = FALSE)
+        pp=ggplot(df.rf()$data)+geom_line(aes(x=tpr,y=ppv),color="blue")+theme_bw()
+        plotly_build(pp)
+        
     })
     
-    output$graph2.rf <- renderPlot({
-        plotROCCurves(df.rf(), measures = list(tnr, tpr), diagonal = FALSE)
+    output$graph2.rf <- renderPlotly({
+       # plotROCCurves(df.rf(), measures = list(tnr, tpr), diagonal = FALSE)
+       bbp= ggplot(df.rf()$data)+geom_line(aes(x=tnr,y=tpr),color="blue")+theme_bw()
+        plotly_build(bbp)
     })
     
-    output$graph3.rf <- renderPlot({
-        plotROCCurves(df.rf(), measures = list(fpr, tpr), diagonal = TRUE)
+    output$graph3.rf <- renderPlotly({
+       # plotROCCurves(df.rf()$data, measures = list(fpr, tpr), diagonal = TRUE)
+        tt=ggplot(df.rf()$data)+geom_line(aes(x=fpr,y=tpr),color="blue")+theme_bw()
+        plotly_build(tt)
     })
     
     
@@ -350,20 +373,33 @@ shinyServer(function(input, output) {
     })
     
     
-    output$graph1.bmr <- renderPlot({
-        plotROCCurves(df.bmr(), measures = list(tpr, ppv), diagonal = FALSE)
+    output$graph1.bmr <- renderPlotly({
+       ta= plotROCCurves(df.bmr(), measures = list(tpr, ppv), diagonal = FALSE)
+       plotly_build(ta)
+        #ggplot(df.bmr()$data)+geom_line(aes(x=tpr,y=ppv))+theme_bw()
     })
     
-    output$graph2.bmr <- renderPlot({
-        plotROCCurves(df.bmr(), measures = list(tnr, tpr), diagonal = FALSE)
+    output$graph2.bmr <- renderPlotly({
+        dd=plotROCCurves(df.bmr(), measures = list(tnr, tpr), diagonal = FALSE)
+        plotly_build(dd)
+        #ggplot(df.bmr()$data)+geom_line(aes(x=tnr,y=tpr))+theme_bw()
     })
     
-    output$graph3.bmr <- renderPlot({
-        plotROCCurves(df.bmr(), measures = list(fpr, tpr), diagonal = TRUE)
+    output$graph3.bmr <- renderPlotly({
+        ti=plotROCCurves(df.bmr(), measures = list(fpr, tpr), diagonal = TRUE)
+        plotly_build(ti)
+        #ggplot(df.bmr()$data)+geom_line(aes(x=fpr,y=tpr))+theme_bw()
     })
     
     output$bmrplot <- renderPlot({
         plotBMRBoxplots(bmr(), measure = mmce, order.lrn = getBMRLearnerIds(bmr()))
+        #plot_ly(bmr()$data, type = "box")
     })
+    # 
+    # output$bmri <- renderPlot({
+    #     plot(bmri())
+    #     
+    #     
+    # })
     
 })
