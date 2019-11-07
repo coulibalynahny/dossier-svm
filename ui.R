@@ -13,59 +13,81 @@ shinyUI(fluidPage(
     actionButton("download","download"),
     
         h2("I.data visualisation",
+           br(),
+           br(),
            h4("our database contains the list of clients of a bank. 
               Customers can be categorized into two groups, which are customers in fraud situations and non-fraud customers."),
+           br(),
            h3("1.first view of the database"),
+           br(),
            h4("the database contains 31 variables. the variable time, the variable amounts, 
               the variable class and the 28 other variables are main components.
               We present in the following table a small preview of our database. 
               In this table we can see the variables time, amount, class and the first five main components"),
            br(),
            dataTableOutput("tableDTt"),
+           br(),
            h3("2.some descriptive statistics"),
+           br(),
+           h4("We look at some basic descriptive statistics to analyze the variables that make up our models. On the first page of the table we see the statistics for the first two variables. 
+              To see the static of the other variables, go to the following pages"),
+           br(),
            dataTableOutput("tableDTs")
        
         ),
-        
+        br(),
+    
         h2("II.rebalance database",
                  
-                 h3("Class distribution in the Original database"),
-                 dataTableOutput("tableDT2"),
+                 h3("1.Class distribution in the Original database"),
+           
+               br(),
+           
                  h4("our database contains a total of 284808 observations including 
               492 observations for individuals in a fraud situation and the rest for individuals in non-fraud situations. Which allows us to notice that our database is not balanced. 
               We have 99.83% of non fraud and 0.17% of fraud. before any modeling, we will rebalance the database to implement the calculations more easily"),
-                 
+                 h4("Because when a database is unbalanced than pushing the model to predict the most prevalent modality. 
+                    To rebalance the database we use the smote function"),
            
+                 br(),
+                 dataTableOutput("tableDT2"),
            ###################################################################
            # debut modifications !!!!
-           
-           h3("Distribution of Class in the SMOTE database"),
+           br(),
+           h3("2.Distribution of Class in the SMOTE database"),
+           br(),
            h4("Machine learning algorithms have trouble learning when one class heavily
                 dominates the other.
                 So we create a new rebalanced datasets using SMOTE 
                     :Synthetic Minority Over-sampling Technique."),    
            "SMOTE synthesises new minority instances between existing (real) minority instances.",
            
+           br(),
            sliderInput("size","Choose Smote sample size",
-                       1000,10000,value=5000,round = T),
+                       1000,80000,value=40000,round = T),
            
            sliderInput("kn","Number of the closest neighbours are considered for synthesis
                              new cases of fraud",
-                       3,10,value=5),
+                       3,10,value=4),
            sliderInput("prop","Number of times existing data points get reused for 
                              synthesis new cases of fraud",
-                       50,100,value=50,round = T),
+                       50,100,value=90,round = T),
            h4("Proportion of Fraud/NonFraud"),
            verbatimTextOutput("smote.prop"),
            
            h4("Number of Fraud/NonFraud"),
            verbatimTextOutput("smote"),
            
+           br(),
+           
+           h4("After rebalancing the database we will split it into two parts. 
+              A test sample that made up 30 percent of our samples and a learning sample for the other 70 percent"),
+           br(),
            
            h4("Features selection"),
            "Entropy-based Filters: Algorithms that find ranks of importance of 
            discrete attributes, basing on their entropy with a continous class attribute",
-           plotOutput("filtre")
+           plotlyOutput("filtre")
            
            
         ),
