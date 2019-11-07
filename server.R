@@ -145,7 +145,10 @@ shinyServer(function(input, output) {
     
     
     output$matrix.lg <- renderPrint({
-        calculateConfusionMatrix(pred.lg(),relative = TRUE)
+        cm=calculateConfusionMatrix(pred.lg(),relative = TRUE)
+        print(cm)
+        
+        
     })
     
     output$roc.lg <- renderPrint({
@@ -284,19 +287,7 @@ shinyServer(function(input, output) {
         
      })
     
-#     output$graph1.svm <- renderPlot({
-#        print(df()$data[,c("tpr")])
-#        print(base::rep(df()$data[,c("tpr")],times=2))
-#         data_2<-data.frame(tpr=base::rep(df()$data[,c("tpr")],times=2),
-#                                  values=c(df()$data[,c("tnr")],df()$data[,c("fpr")]),
-#                                  group=c(base::rep("graph 1",dim(df()$data[,c("tpr")])[1]),base::rep("graph 2",dim(df()$data[,c("tpr")])[1])))
-# print(data_2)
-# print(df()$data[,c("tpr")])
-#         plotROCCurves(df(), measures = list(tpr, ppv), diagonal = FALSE)
-#         ggplot(data_2)+geom_line(aes(x=tpr,y=values,group=group),color="blue",size=3)+theme_minimal()+
-#              xlab("True positive rate")+ylab("Positive predict rate")
-#     })
-    
+  
     output$graph2.svm <- renderPlotly({
         # plotROCCurves(df(), measures = list(tnr, tpr), diagonal = FALSE)
         plo2=ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="dark green")+theme_bw()+
