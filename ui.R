@@ -151,7 +151,15 @@ linear, but some observations can not be correctly classified."),
 classified but below the margin if they are between 0 and 1, or even poorly classified, if they exceed 1.
                     The penalization parameter C controls the arbitration between the size of the margin and the error rate. If C is small, classification errors are less penalized and the focus is on maximizing the margin. There is a risk of under-fitting(poor classification rate on the sample)
                     If it is large, the emphasis is on the absence of misclassification at the cost of a lower margin. There is a risk of over-fitting."),
-                 
+                 br(),
+                 h4("In practice, the performances of the SVM are very sensitive to the choice of the parameter of penalization (cost parameter) C. How to select an optimal hyper-parameter C ?"),
+                 h3("First solution: cross validation"),
+                 br(),
+                 h4("1. The sample is partitioned into 3 learning samples (training), validation (validation) and test (test) by random undersampling. The test sample is used to evaluate the out - of - sample performance of the classifier."),
+                 h4("2. On the training sample, the SVM is applied for different values of C."),
+                 h4("3.The next step is to determine the value of C that minimizes the probability of misclassification measured on the validation sample."),
+                 br(),
+                 h3("Second solution: k fold cross validation"),
                  h3("hyperparameters's choise"),
                  
                  sliderInput("cost.param","choice of cost parameters",
