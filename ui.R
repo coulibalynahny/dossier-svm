@@ -124,6 +124,10 @@ SVMs are based on two key ideas:"),
                  br(),
                  h4("In the SVM, the optimal separation boundary is chosen as the one that maximizes the margin, with the margin being the distance between the separation (hyperplane) boundary and the nearest observations.
 The problem is to find this optimal dividing boundary from a learning set and the solution is to state the problem as a quadratic optimization problem."),
+                 h3("2.The notion of kernel function"),
+                 h4("In the case where the data is not linearly separable, the second key idea of the SVM is to transform the representation space of the input data into a larger dimension space (possibly of infinite dimension), in which it is probable that there is a linear separation.
+The trick is to use a kernel function that does not require the explicit knowledge of the transformation to be applied for the space change.
+The kernel functions make it possible to transform a scalar product (expensive computation in a large space) into a simple point evaluation of a function."),
                  h3("hyperparameters's choise"),
                  
                  sliderInput("cost.param","choice of cost parameters",
