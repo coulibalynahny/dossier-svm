@@ -140,6 +140,17 @@ The probability of making a classification error is the probablity of having an 
                  br(),
                  h4("A sample is linearly separable if it there is a linear classifier that correctly classifies all the observations in the sample.If all classifications g (x) = 1 are located in the area above the separating hyperplane and all the classifications g (x) = -1 are below the separator hyperplane, there is no classification error.
 For a linearly separable sample, there may be several linear classifiers ( several pairs (w, b)) whose learning performance is identical(without misclassification) .To select the optimal hyperplane: it is the criterion of optimal margins. In the case of a linearly separable sample, the support vector machine (SVM) is the linear classifier ( w*, b *) that perfectly classifies all observations on the training sample and is associated with the largest margin (The margin is twice the distance d from the closest point(support vector) to the hyperplane)",
+                 h3("It is now assumed that the training sample is not linearly separable.
+Two cases:"),
+                 br(),
+                 h3("1. The sample is almost linearly separable: the 'optimal' separation is
+linear, but some observations can not be correctly classified."),
+                 h3("2.The sample is not linearly separable: the 'optimal' separation is
+                    non-linear."),
+                 h4("1.In the case of an almost linearly separable sample, we introduce n relaxation variables of the classification constraints yi h (xi)> 1, which are called slack variables and which are well
+classified but below the margin if they are between 0 and 1, or even poorly classified, if they exceed 1.
+                    The penalization parameter C controls the arbitration between the size of the margin and the error rate. If C is small, classification errors are less penalized and the focus is on maximizing the margin. There is a risk of under-fitting(poor classification rate on the sample)
+                    If it is large, the emphasis is on the absence of misclassification at the cost of a lower margin. There is a risk of over-fitting."),
                  
                  h3("hyperparameters's choise"),
                  
