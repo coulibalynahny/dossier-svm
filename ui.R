@@ -78,11 +78,9 @@ shinyUI(fluidPage(
            sliderInput("prop","Number of times existing data points get reused for 
                              synthesis new cases of fraud",
                        50,100,value=90,round = T),
-           h4("Proportion of Fraud/NonFraud"),
-           verbatimTextOutput("smote.prop"),
            
-           h4("Number of Fraud/NonFraud"),
-           verbatimTextOutput("smote"),
+           h4("Number of Fraud/No"),
+           dataTableOutput("smote"),
            
            br(),
            

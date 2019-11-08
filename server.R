@@ -84,14 +84,14 @@ shinyServer(function(input, output) {
     })
     
     
-    
-    # table data.train
-    output$smote <- renderPrint({
-        table(DT.smote()$Class)
-    })
-    output$smote.prop <- renderPrint({
-        prop.table(table(DT.smote()$Class))
-    })
+    # 
+    # # table data.train
+    # output$smote <- renderPrint({
+    #     table(DT.smote()$Class)
+    # })
+    # output$smote.prop <- renderPrint({
+    #     prop.table(table(DT.smote()$Class))
+    # })
     
     
     # splitting train (70%) / test (30%)
