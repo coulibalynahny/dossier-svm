@@ -116,8 +116,14 @@ shinyUI(fluidPage(
 In the case of a classification problem, we are reffering to SVM (support vector machine) and in the case of a regression, we are reffering to SVR (support vector regression).
 For the presentation of the project, we will expose the classification problem (Fraud or Non-Fraud)
 SVMs are based on two key ideas:"),
+                 h3("1. The notion of maximum margin"),
+                 h3("2.The notion of kernel function"),
+                
+                   br(),
+                 h3("1. The notion of maximum margin"),
                  br(),
-                 h3("1. The notion of maximum margin,2.The notion of kernel function"),
+                 h4("In the SVM, the optimal separation boundary is chosen as the one that maximizes the margin, with the margin being the distance between the separation (hyperplane) boundary and the nearest observations.
+The problem is to find this optimal dividing boundary from a learning set and the solution is to state the problem as a quadratic optimization problem."),
                  h3("hyperparameters's choise"),
                  
                  sliderInput("cost.param","choice of cost parameters",
