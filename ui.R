@@ -10,9 +10,14 @@ shinyUI(fluidPage(
     theme=shinytheme(theme = "united"),
     
     titlePanel("SVM project on R Shiny"),
+    
     actionButton("download","download"),
     
-        h2("I.data visualisation",
+    navlistPanel(
+    
+    tabPanel("I.data visualisation",
+             
+        h1("I.data visualisation"),
            br(),
            br(),
            h4("our database contains the list of clients of a bank. 
@@ -35,9 +40,10 @@ shinyUI(fluidPage(
            dataTableOutput("tableDTs")
        
         ),
-        br(),
-    
-        h2("II.rebalance database",
+        
+    tabPanel("II.rebalancing",
+             
+        h1("II.rebalance database"),
                  
                  h3("1.Class distribution in the Original database"),
            
@@ -94,18 +100,14 @@ shinyUI(fluidPage(
     ###################
     # fin des modifications !!!!!
     
-                h2("III.the models"),
-    
-    navlistPanel(
-        "list of models to test",
-        
-        
+         #       h2("III.the models"),
+
         
         
         #svm
-        tabPanel("SVM",
+        tabPanel("III.SVM",
             
-                 h1("SVM model"),
+                 h1("III.SVM model"),
                  
                  br(),
                  h2("Theoretical Explanation of SVM "),
@@ -142,8 +144,8 @@ SVMs are based on two key ideas:"),
         ),
         
         #logistic regression
-        tabPanel("logistic regression",
-                 h2("logistic regression model"),
+        tabPanel("IV.logistic regression",
+                 h2("IV.logistic regression model"),
                  
                  
                  h4("confusion matrix"),
@@ -163,10 +165,14 @@ SVMs are based on two key ideas:"),
                  
         ),
         # decision tree
-        tabPanel("decision tree",
-                 h1("decision tree"),
+        tabPanel("V.decision tree",
+                 
+                 h1("V.decision tree"),
+                 
                  h5("construction of the decision tree"),
+                 
                  plotOutput("tree"),
+                 
                  h3("the result analysis"),
                  
                  h4("confusion matrix"),
@@ -190,8 +196,9 @@ SVMs are based on two key ideas:"),
         
         
         #random forest
-        tabPanel("random forest",
-                 h1("random forest model"),
+        tabPanel("VI.random forest",
+                 
+                 h1("VI.random forest model"),
                  
                  h3("choice of hyperparameters"),
                  
@@ -219,8 +226,9 @@ SVMs are based on two key ideas:"),
         ),
       
         # model comparision
-        tabPanel("model comparison",
-                 h1("comparison of different models"),
+        tabPanel("VII.model comparison",
+                 
+                 h1("VII.comparison of different models"),
                  h5("We chose to re-sample the model in two ways that are: k-fold and holdout. "),
                  h4("resampling using k-fold method"),
                  sliderInput("k","chose your K ",0,10,value=5,round = T),
@@ -245,4 +253,4 @@ SVMs are based on two key ideas:"),
         
         
         
-    )))
+  )  ))
