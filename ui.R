@@ -114,8 +114,50 @@ shinyUI(fluidPage(
 In the case of a classification problem, we are reffering to SVM (support vector machine) and in the case of a regression, we are reffering to SVR (support vector regression).
 For the presentation of the project, we will expose the classification problem (Fraud or Non-Fraud)
 SVMs are based on two key ideas:"),
+                 h3("1. The notion of maximum margin"),
+                 h3("2.The notion of kernel function"),
+                
+                   br(),
+                 h3("1. The notion of maximum margin"),
                  br(),
-                 h3("1. The notion of maximum margin,2.The notion of kernel function"),
+                 h4("In the SVM, the optimal separation boundary is chosen as the one that maximizes the margin, with the margin being the distance between the separation (hyperplane) boundary and the nearest observations.
+The problem is to find this optimal dividing boundary from a learning set and the solution is to state the problem as a quadratic optimization problem."),
+                 h3("2.The notion of kernel function"),
+                 h4("In the case where the data is not linearly separable, the second key idea of the SVM is to transform the representation space of the input data into a larger dimension space (possibly of infinite dimension), in which it is probable that there is a linear separation.
+The trick is to use a kernel function that does not require the explicit knowledge of the transformation to be applied for the space change.
+The kernel functions make it possible to transform a scalar product (expensive computation in a large space) into a simple point evaluation of a function."),
+                 h3("SVM'S Intuition "),
+                 br(),
+                 h4("We are interested in a phenomenon f (deterministic or stochastic) which, from a certain set of inputs (predictors, variables) x, produces an output (label) y = f (x).
+The goal is to find f (unknown) from a training sample {xi, yi}, i = 1, ..., n.
+We are looking for a function (classifier) g that minimizes the classification error probability, but rather than building g directly, we usually build a decision function h that is associated to the classifier.
+The classifier takes the value 1 for a decision function greater or equal to 0 and -1 for a value inferior to 0 because in continuous variables, the probability of being at a point is zero. 
+We introduce the notion of separating hyperplane H which separates the space of the input data X into two half-spaces corresponding to the two classes provided for y. It is defined by the equation of the decision function that equals 0.
+The probability of making a classification error is the probablity of having an y different than the classifier g"),
+                 h3("Linearly Separable Sample"),
+                 br(),
+                 h4("A sample is linearly separable if it there is a linear classifier that correctly classifies all the observations in the sample.If all classifications g (x) = 1 are located in the area above the separating hyperplane and all the classifications g (x) = -1 are below the separator hyperplane, there is no classification error.
+For a linearly separable sample, there may be several linear classifiers ( several pairs (w, b)) whose learning performance is identical(without misclassification) .To select the optimal hyperplane: it is the criterion of optimal margins. In the case of a linearly separable sample, the support vector machine (SVM) is the linear classifier ( w*, b *) that perfectly classifies all observations on the training sample and is associated with the largest margin (The margin is twice the distance d from the closest point(support vector) to the hyperplane)",
+                 h3("It is now assumed that the training sample is not linearly separable.
+Two cases:"),
+                 br(),
+                 h3("1. The sample is almost linearly separable: the 'optimal' separation is
+linear, but some observations can not be correctly classified."),
+                 h3("2.The sample is not linearly separable: the 'optimal' separation is
+                    non-linear."),
+                 h4("1.In the case of an almost linearly separable sample, we introduce n relaxation variables of the classification constraints yi h (xi)> 1, which are called slack variables and which are well
+classified but below the margin if they are between 0 and 1, or even poorly classified, if they exceed 1.
+                    The penalization parameter C controls the arbitration between the size of the margin and the error rate. If C is small, classification errors are less penalized and the focus is on maximizing the margin. There is a risk of under-fitting(poor classification rate on the sample)
+                    If it is large, the emphasis is on the absence of misclassification at the cost of a lower margin. There is a risk of over-fitting."),
+                 br(),
+                 h4("In practice, the performances of the SVM are very sensitive to the choice of the parameter of penalization (cost parameter) C. How to select an optimal hyper-parameter C ?"),
+                 h3("First solution: cross validation"),
+                 br(),
+                 h4("1. The sample is partitioned into 3 learning samples (training), validation (validation) and test (test) by random undersampling. The test sample is used to evaluate the out - of - sample performance of the classifier."),
+                 h4("2. On the training sample, the SVM is applied for different values of C."),
+                 h4("3.The next step is to determine the value of C that minimizes the probability of misclassification measured on the validation sample."),
+                 br(),
+                 h3("Second solution: k fold cross validation"),
                  h3("hyperparameters's choise"),
                  
                  sliderInput("cost.param","choice of cost parameters",
