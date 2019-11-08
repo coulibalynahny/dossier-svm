@@ -136,6 +136,11 @@ We are looking for a function (classifier) g that minimizes the classification e
 The classifier takes the value 1 for a decision function greater or equal to 0 and -1 for a value inferior to 0 because in continuous variables, the probability of being at a point is zero. 
 We introduce the notion of separating hyperplane H which separates the space of the input data X into two half-spaces corresponding to the two classes provided for y. It is defined by the equation of the decision function that equals 0.
 The probability of making a classification error is the probablity of having an y different than the classifier g"),
+                 h3("Linearly Separable Sample"),
+                 br(),
+                 h4("A sample is linearly separable if it there is a linear classifier that correctly classifies all the observations in the sample.If all classifications g (x) = 1 are located in the area above the separating hyperplane and all the classifications g (x) = -1 are below the separator hyperplane, there is no classification error.
+For a linearly separable sample, there may be several linear classifiers ( several pairs (w, b)) whose learning performance is identical(without misclassification) .To select the optimal hyperplane: it is the criterion of optimal margins. In the case of a linearly separable sample, the support vector machine (SVM) is the linear classifier ( w*, b *) that perfectly classifies all observations on the training sample and is associated with the largest margin (The margin is twice the distance d from the closest point(support vector) to the hyperplane)",
+                 
                  h3("hyperparameters's choise"),
                  
                  sliderInput("cost.param","choice of cost parameters",
