@@ -70,7 +70,7 @@ shinyUI(fluidPage(
            
            br(),
            sliderInput("size","Choose Smote sample size",
-                       1000,80000,value=40000,round = T),
+                       1000,140000,value=80000,round = T),
            
            sliderInput("kn","Number of the closest neighbours are considered for synthesis
                              new cases of fraud",
@@ -79,7 +79,7 @@ shinyUI(fluidPage(
                              synthesis new cases of fraud",
                        50,100,value=90,round = T),
            
-           h4("Number of Fraud/No"),
+           h4("distribution of the database after rebalancing"),
            dataTableOutput("smote"),
            
            br(),
@@ -108,14 +108,17 @@ shinyUI(fluidPage(
                  h1("III.SVM model"),
                  
                  br(),
+                 
                  h2("Theoretical Explanation of SVM "),
+                 
                  h3("Introduction"),
+                 
                  h4("Support vector machines (SVM), introduced by Vladimir Vapnik (Vapnik (1995, 1998)), are a set of supervised learning techniques designed to solve classification or regression problems.
 In the case of a classification problem, we are reffering to SVM (support vector machine) and in the case of a regression, we are reffering to SVR (support vector regression).
 For the presentation of the project, we will expose the classification problem (Fraud or Non-Fraud)
-SVMs are based on two key ideas:"),
-                 h3("1. The notion of maximum margin"),
-                 h3("2.The notion of kernel function"),
+SVMs are based on two key ideas:
+                 The notion of maximum margin
+                 The notion of kernel function"),
                 
                    br(),
                  h3("1. The notion of maximum margin"),
@@ -137,7 +140,9 @@ The probability of making a classification error is the probablity of having an 
                  h3("Linearly Separable Sample"),
                  br(),
                  h4("A sample is linearly separable if it there is a linear classifier that correctly classifies all the observations in the sample.If all classifications g (x) = 1 are located in the area above the separating hyperplane and all the classifications g (x) = -1 are below the separator hyperplane, there is no classification error.
-For a linearly separable sample, there may be several linear classifiers ( several pairs (w, b)) whose learning performance is identical(without misclassification) .To select the optimal hyperplane: it is the criterion of optimal margins. In the case of a linearly separable sample, the support vector machine (SVM) is the linear classifier ( w*, b *) that perfectly classifies all observations on the training sample and is associated with the largest margin (The margin is twice the distance d from the closest point(support vector) to the hyperplane)",
+For a linearly separable sample, there may be several linear classifiers ( several pairs (w, b)) whose learning performance is identical(without misclassification) .
+                    To select the optimal hyperplane: it is the criterion of optimal margins. 
+                    In the case of a linearly separable sample, the support vector machine (SVM) is the linear classifier ( w*, b *) that perfectly classifies all observations on the training sample and is associated with the largest margin (The margin is twice the distance d from the closest point(support vector) to the hyperplane"),
                  h3("It is now assumed that the training sample is not linearly separable.
 Two cases:"),
                  br(),
@@ -166,8 +171,11 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  selectInput("kernel.param", "choice of kernel", 
                              choices= c("linear","sigmoid","polynomial","radial")),
                  
-                 h4("confusion matrix"),
-                 verbatimTextOutput("matrix.svm"),
+                 h3("Absolute confusion matrix"),
+                 plotOutput("amatrix.svm"),
+                 
+                 h3("Relative confusion matrix"),
+                 plotOutput("rmatrix.svm"),
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.svm"),
@@ -188,8 +196,13 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  h2("IV.logistic regression model"),
                  
                  
-                 h4("confusion matrix"),
-                 verbatimTextOutput("matrix.lg"),
+                 h3("absolute confusion matrix"),
+                 plotOutput("matrix.lg"),
+                 
+                 
+                 h3("relatrive confusion matrix"),
+                 plotOutput("rmatrix.lg"),
+                 
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.lg"),
@@ -215,8 +228,11 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  
                  h3("the result analysis"),
                  
-                 h4("confusion matrix"),
-                 verbatimTextOutput("matrix.tree"),
+                 h3("Absolute confusion matrix"),
+                 plotOutput("amatrix.tree"),
+                 
+                 h3("Relative confusion matrix"),
+                 plotOutput("rmatrix.tree"),
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.tree"),

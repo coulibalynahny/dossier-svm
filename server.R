@@ -16,13 +16,13 @@ library(plotly)
 
 # chemin d'acces
 
-# DT=read.csv("C:/Users/nahny/Documents/GitHub/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+DT=read.csv("C:/Users/nahny/Documents/GitHub/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
 
-DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+#DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
 
 # DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
 
-
+set.seed(123234)
 DT$Amount=as.vector(scale(DT$Amount))
 DT$Time=as.vector(scale(DT$Time))
 DT$Class=as.factor(DT$Class)
@@ -50,11 +50,11 @@ shinyServer(function(input, output) {
     output$tableDT2<-renderDT({
          DT::datatable(table_prop,list(dom = 't'))
     })
-    
+
     output$tableDTt<-renderDT({
         DT::datatable(tableex)
     })
-    
+
     output$tableDTs<-renderDT({
         DT::datatable(stat)
     })
@@ -67,12 +67,14 @@ shinyServer(function(input, output) {
         DT.smote=smotefamily::SMOTE(DT[,-31], DT[,31], K = input$kn, 
                                     dup_size = input$prop)$data
         names(DT.smote)[31]="Class"
+        
+        set.seed(12345)
         s=sample(1:nrow(DT.smote),input$size)
         DT.smote=DT.smote[s,]
         return(DT.smote)
     }) 
     
-    output$tableSmote <- renderDT({
+    output$smote <- renderDT({
         
         ab=table(DT.smote()$Class)
         ab1= prop.table(table(DT.smote()$Class))
@@ -142,13 +144,50 @@ shinyServer(function(input, output) {
     pred.lg <- reactive({ 
         predict(train.lg(),test.task())
     }) 
+    cm <- reactive({
+      cm=calculateConfusionMatrix(pred.lg(),relative = TRUE)
+    })
     
+    output$matrix.lg <- renderPlot({
+        
+        cmd=as.data.frame(cm()[["result"]]) 
+        
+        predicted <- factor(c("fraud", "fraud", "fraud", "non fraud", "non fraud", "non fraud","error","error","error"))
+        true <- factor(c("fraud", "non fraud","error", "fraud", "non fraud","error","fraud", "non fraud","error"))
+        b=cmd[,2]
+        a=cmd[,1]
+        c=cmd[,3]
+        Y =c(a,b,c)
+        
+        df <- data.frame(predicted, true, Y)
+        
+        ggplot(data =  df, mapping = aes(x = predicted, y =true )) +
+          geom_tile(aes(fill = Y), colour = "white") +
+          geom_text(aes(label = sprintf("%1.0f", Y)), vjust = 1) +
+          scale_fill_gradient2(mid="light blue", high = "blue") +
+          theme_bw() + theme(legend.position = "none")
+  
+    })
     
-    output$matrix.lg <- renderPrint({
-        cm=calculateConfusionMatrix(pred.lg(),relative = TRUE)
-        print(cm)
-        
-        
+    output$rmatrix.lg <- renderPlot({
+      
+      rcmd=as.data.frame(cm()[["relative.col"]]) 
+      
+      predicted <- factor(c("fraud", "fraud","fraud", "non fraud","non fraud","non fraud"))
+      true <- factor(c("fraud", "non fraud","error","fraud", "non fraud","error"))
+      alg=rcmd[,1]
+      blg=rcmd[,2]
+      #c=cmd[,3]
+      Ylg =c(alg,blg)
+      
+      dflg <- data.frame(predicted, true, Ylg)
+      
+      ggplot(data =  dflg, mapping = aes(x = predicted, y =true )) +
+        geom_tile(aes(fill = Ylg), colour = "white") +
+        geom_text(aes(label = sprintf("%1.0f", Ylg)), vjust = 1) +
+        scale_fill_gradient2(mid="light blue", high = "blue") +
+        theme_bw() + theme(legend.position = "none")
+      
     })
     
     output$roc.lg <- renderPrint({
@@ -211,10 +250,54 @@ shinyServer(function(input, output) {
         predict(train.tree(),test.task())
     }) 
     
-    
-    output$matrix.tree <- renderPrint({
-        calculateConfusionMatrix(pred.tree(),relative = TRUE)
+    tcm <- reactive({ calculateConfusionMatrix(pred.tree(),relative = TRUE)
     })
+    
+    
+    output$amatrix.tree <- renderPlot({
+      
+      #acmd=as.data.frame(tcm()[["result"]]) 
+      
+      atcm=as.data.frame(tcm()[["result"]]) 
+      
+      predicted <- factor(c("fraud", "fraud", "fraud", "non fraud", "non fraud", "non fraud","error","error","error"))
+      true <- factor(c("fraud", "non fraud","error", "fraud", "non fraud","error","fraud", "non fraud","error"))
+      atb=atcm[,2]
+      ata=atcm[,1]
+      atc=atcm[,3]
+      atY =c(ata,atb,atc)
+      
+      atdf <- data.frame(predicted, true, atY)
+      
+      ggplot(data =  atdf, mapping = aes(x = predicted, y =true )) +
+        geom_tile(aes(fill = atY), colour = "white") +
+        geom_text(aes(label = sprintf("%1.0f", atY)), vjust = 1) +
+        scale_fill_gradient2(mid="light blue", high = "blue") +
+        theme_bw() + theme(legend.position = "none")
+      
+      
+    })
+    
+    output$rmatrix.tree <- renderPlot({
+      
+      cmd=as.data.frame(tcm()[["relative.col"]]) 
+      
+      predicted <- factor(c("fraud", "fraud","fraud", "non fraud","non fraud","non fraud"))
+      true <- factor(c("fraud", "non fraud","error","fraud", "non fraud","error"))
+      ar=cmd[,1]
+      br=cmd[,2]
+      #c=cmd[,3]
+      Yr =c(ar,br)
+     
+      dfr <- data.frame(predicted, true, Yr)
+      
+      ggplot(data =  dfr, mapping = aes(x = predicted, y =true )) +
+        geom_tile(aes(fill = Yr), colour = "white") +
+        geom_text(aes(label = sprintf("%1.0f", Yr)), vjust = 1) +
+        scale_fill_gradient2(mid="light blue", high = "blue") +
+        theme_bw() + theme(legend.position = "none")
+    })
+    
     output$roc.tree <- renderPrint({
         calculateROCMeasures(pred.tree())
     })
@@ -265,11 +348,33 @@ shinyServer(function(input, output) {
         predict(train.svm(),test.task())
     }) 
     
-    
-    output$matrix.svm <- renderPrint({
-        calculateConfusionMatrix(pred.svm(),relative = TRUE)
+    svm.cm <- reactive({
+      calculateConfusionMatrix(pred.svm(),relative = TRUE)
     })
     
+    output$amatrix.svm <- renderPlot({
+      
+      
+    })
+    output$rmatrix.svm <- renderPlot({
+      
+      asvm.cm=as.data.frame(svm.cm()[["relative.col"]]) 
+      
+      predicted <- factor(c("fraud", "fraud","fraud", "non fraud","non fraud","non fraud"))
+      true <- factor(c("fraud", "non fraud","error","fraud", "non fraud","error"))
+      asvm.a=asvm.cm[,1]
+      asvm.b=asvm.cm[,2]
+      #c=cmd[,3]
+      asvm.Y =c(asvm.a,asvm.b)
+      
+      asvm.df <- data.frame(predicted, true, asvm.Y)
+      
+      ggplot(data =  asvm.df, mapping = aes(x = predicted, y =true )) +
+        geom_tile(aes(fill = asvm.Y), colour = "white") +
+        geom_text(aes(label = sprintf("%1.0f", asvm.Y)), vjust = 1) +
+        scale_fill_gradient2(mid="light blue", high = "blue") +
+        theme_bw() + theme(legend.position = "none")
+    })
     output$roc.svm <- renderPrint({
         calculateROCMeasures(pred.svm())
     })
