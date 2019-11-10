@@ -173,9 +173,9 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  
                  h3("Absolute confusion matrix"),
                  plotOutput("amatrix.svm"),
-                 
-                 h3("Relative confusion matrix"),
-                 plotOutput("rmatrix.svm"),
+                 # 
+                 # h3("Relative confusion matrix"),
+                 # plotOutput("rmatrix.svm"),
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.svm"),
@@ -199,9 +199,9 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  h3("absolute confusion matrix"),
                  plotOutput("matrix.lg"),
                  
-                 
-                 h3("relatrive confusion matrix"),
-                 plotOutput("rmatrix.lg"),
+                 # 
+                 # h3("relatrive confusion matrix"),
+                 # plotOutput("rmatrix.lg"),
                  
                  
                  h4("ROC measures"),
@@ -230,9 +230,9 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  
                  h3("Absolute confusion matrix"),
                  plotOutput("amatrix.tree"),
-                 
-                 h3("Relative confusion matrix"),
-                 plotOutput("rmatrix.tree"),
+                 # 
+                 # h3("Relative confusion matrix"),
+                 # plotOutput("rmatrix.tree"),
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.tree"),
@@ -264,8 +264,12 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  sliderInput("mtry.param", "Number of variables randomly sampled as candidates at each split", 
                              3,8,value=5),
                  
-                 h4("confusion matrix"),
-                 verbatimTextOutput("matrix.rf"),
+                 h4("Absolute confusion matrix"),
+                 plotOutput("amatrix.rf"),
+                 # 
+                 # h4("relative confusion matrix"),
+                 # plotOutput("ramatrix.rf"),
+                 # 
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.rf"),

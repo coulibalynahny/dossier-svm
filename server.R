@@ -169,27 +169,27 @@ shinyServer(function(input, output) {
   
     })
     
-    output$rmatrix.lg <- renderPlot({
-      
-      rcmd=as.data.frame(cm()[["relative.col"]]) 
-      
-      predicted <- factor(c("fraud", "fraud","fraud", "non fraud","non fraud","non fraud"))
-      true <- factor(c("fraud", "non fraud","error","fraud", "non fraud","error"))
-      alg=rcmd[,1]
-      blg=rcmd[,2]
-      #c=cmd[,3]
-      Ylg =c(alg,blg)
-      
-      dflg <- data.frame(predicted, true, Ylg)
-      
-      ggplot(data =  dflg, mapping = aes(x = predicted, y =true )) +
-        geom_tile(aes(fill = Ylg), colour = "white") +
-        geom_text(aes(label = sprintf("%1.0f", Ylg)), vjust = 1) +
-        scale_fill_gradient2(mid="light blue", high = "blue") +
-        theme_bw() + theme(legend.position = "none")
-      
-    })
-    
+    # output$rmatrix.lg <- renderPlot({
+    #   
+    #   lg.cm=as.data.frame(cm()[["relative.col"]]) 
+    #   
+    #   predicted <- factor(c("fraud", "fraud","fraud", "non fraud","non fraud","non fraud"))
+    #   true <- factor(c("fraud", "non fraud","error","fraud", "non fraud","error"))
+    #   lg.a=lg.cm[,1]
+    #   lg.b=lg.cm[,2]
+    #   #c=cmd[,3]
+    #   lg.Y=c(lg.a,lg.b)
+    #   
+    #   lg.df <- data.frame(predicted, true, lg.Y)
+    #   
+    #   ggplot(data =  lg.df, mapping = aes(x = predicted, y =true )) +
+    #     geom_tile(aes(fill = lg.Y), colour = "white") +
+    #     geom_text(aes(label = sprintf("%1.0f", lg.Y)), vjust = 1) +
+    #     scale_fill_gradient2(mid="light blue", high = "blue") +
+    #     theme_bw() + theme(legend.position = "none")
+    #   
+    # })
+    # 
     output$roc.lg <- renderPrint({
         calculateROCMeasures(pred.lg())
     })
@@ -278,26 +278,26 @@ shinyServer(function(input, output) {
       
     })
     
-    output$rmatrix.tree <- renderPlot({
-      
-      cmd=as.data.frame(tcm()[["relative.col"]]) 
-      
-      predicted <- factor(c("fraud", "fraud","fraud", "non fraud","non fraud","non fraud"))
-      true <- factor(c("fraud", "non fraud","error","fraud", "non fraud","error"))
-      ar=cmd[,1]
-      br=cmd[,2]
-      #c=cmd[,3]
-      Yr =c(ar,br)
-     
-      dfr <- data.frame(predicted, true, Yr)
-      
-      ggplot(data =  dfr, mapping = aes(x = predicted, y =true )) +
-        geom_tile(aes(fill = Yr), colour = "white") +
-        geom_text(aes(label = sprintf("%1.0f", Yr)), vjust = 1) +
-        scale_fill_gradient2(mid="light blue", high = "blue") +
-        theme_bw() + theme(legend.position = "none")
-    })
-    
+    # output$rmatrix.tree <- renderPlot({
+    #   
+    #   cmd=as.data.frame(tcm()[["relative.col"]]) 
+    #   
+    #   predicted <- factor(c("fraud", "fraud","fraud", "non fraud","non fraud","non fraud"))
+    #   true <- factor(c("fraud", "non fraud","error","fraud", "non fraud","error"))
+    #   ar=cmd[,1]
+    #   br=cmd[,2]
+    #   #c=cmd[,3]
+    #   Yr =c(ar,br)
+    #  
+    #   dfr <- data.frame(predicted, true, Yr)
+    #   
+    #   ggplot(data =  dfr, mapping = aes(x = predicted, y =true )) +
+    #     geom_tile(aes(fill = Yr), colour = "white") +
+    #     geom_text(aes(label = sprintf("%1.0f", Yr)), vjust = 1) +
+    #     scale_fill_gradient2(mid="light blue", high = "blue") +
+    #     theme_bw() + theme(legend.position = "none")
+    # })
+    # 
     output$roc.tree <- renderPrint({
         calculateROCMeasures(pred.tree())
     })
@@ -353,28 +353,46 @@ shinyServer(function(input, output) {
     })
     
     output$amatrix.svm <- renderPlot({
+      svm.cmd=as.data.frame(svm.cm()[["result"]]) 
       
+      predicted <- factor(c("fraud", "fraud", "fraud", "non fraud", "non fraud", "non fraud","error","error","error"))
+      true <- factor(c("fraud", "non fraud","error", "fraud", "non fraud","error","fraud", "non fraud","error"))
+      svm.b=svm.cmd[,2]
+      svm.a=svm.cmd[,1]
+      svm.c=svm.cmd[,3]
+      svm.Y =c(svm.a,svm.b,svm.c)
       
-    })
-    output$rmatrix.svm <- renderPlot({
+      svm.df <- data.frame(predicted, true, svm.Y)
       
-      asvm.cm=as.data.frame(svm.cm()[["relative.col"]]) 
-      
-      predicted <- factor(c("fraud", "fraud","fraud", "non fraud","non fraud","non fraud"))
-      true <- factor(c("fraud", "non fraud","error","fraud", "non fraud","error"))
-      asvm.a=asvm.cm[,1]
-      asvm.b=asvm.cm[,2]
-      #c=cmd[,3]
-      asvm.Y =c(asvm.a,asvm.b)
-      
-      asvm.df <- data.frame(predicted, true, asvm.Y)
-      
-      ggplot(data =  asvm.df, mapping = aes(x = predicted, y =true )) +
-        geom_tile(aes(fill = asvm.Y), colour = "white") +
-        geom_text(aes(label = sprintf("%1.0f", asvm.Y)), vjust = 1) +
+      ggplot(data =  svm.df, mapping = aes(x = predicted, y =true )) +
+        geom_tile(aes(fill = svm.Y), colour = "white") +
+        geom_text(aes(label = sprintf("%1.0f", svm.Y)), vjust = 1) +
         scale_fill_gradient2(mid="light blue", high = "blue") +
         theme_bw() + theme(legend.position = "none")
-    })
+
+      })
+    
+    
+    # output$rmatrix.svm <- renderPlot({
+    #   
+    #   asvm.cm=as.data.frame(svm.cm()[["relative.col"]]) 
+    #   
+    #   predicted <- factor(c("fraud", "fraud","fraud", "non fraud","non fraud","non fraud"))
+    #   true <- factor(c("fraud", "non fraud","error","fraud", "non fraud","error"))
+    #   asvm.a=asvm.cm[,1]
+    #   asvm.b=asvm.cm[,2]
+    #   #c=cmd[,3]
+    #   asvm.Y =c(asvm.a,asvm.b)
+    #   
+    #   asvm.df <- data.frame(predicted, true, asvm.Y)
+    #   
+    #   ggplot(data =  asvm.df, mapping = aes(x = predicted, y =true )) +
+    #     geom_tile(aes(fill = asvm.Y), colour = "white") +
+    #     geom_text(aes(label = sprintf("%1.0f", asvm.Y)), vjust = 1) +
+    #     scale_fill_gradient2(mid="light blue", high = "blue") +
+    #     theme_bw() + theme(legend.position = "none")
+    # })
+    
     output$roc.svm <- renderPrint({
         calculateROCMeasures(pred.svm())
     })
@@ -427,11 +445,51 @@ shinyServer(function(input, output) {
         predict(train.rf(),test.task())
     }) 
     
-    
-    output$matrix.rf <- renderPrint({
-        calculateConfusionMatrix(pred.rf(),relative = TRUE)
+    rf.cm <- reactive ({
+      calculateConfusionMatrix(pred.rf(),relative = TRUE)
     })
     
+    output$amatrix.rf <- renderPlot({
+      
+      rf.cm=as.data.frame(rf.cm()[["result"]]) 
+      
+      predicted <- factor(c("fraud", "fraud", "fraud", "non fraud", "non fraud", "non fraud","error","error","error"))
+      true <- factor(c("fraud", "non fraud","error", "fraud", "non fraud","error","fraud", "non fraud","error"))
+      rf.b=rf.cm[,2]
+      rf.a=rf.cm[,1]
+      rf.c=rf.cm[,3]
+      rf.Y =c(rf.a,rf.b,rf.c)
+      
+      rf.df <- data.frame(predicted, true, rf.Y)
+      
+      ggplot(data =  rf.df, mapping = aes(x = predicted, y =true )) +
+        geom_tile(aes(fill = rf.Y), colour = "white") +
+        geom_text(aes(label = sprintf("%1.0f", rf.Y)), vjust = 1) +
+        scale_fill_gradient2(mid="light blue", high = "blue") +
+        theme_bw() + theme(legend.position = "none")
+      
+    })
+    # 
+    # output$ramatrix.rf <- renderPlot ({
+    #   rrf.cm=as.data.frame(rf.cm()[["relative.col"]]) 
+    #   
+    #   predicted <- factor(c("fraud", "fraud","fraud", "non fraud","non fraud","non fraud"))
+    #   true <- factor(c("fraud", "non fraud","error","fraud", "non fraud","error"))
+    #   rrf.a=rrf.cm[,1]
+    #   rrf.b=rrf.cm[,2]
+    #   #c=cmd[,3]
+    #   rrf.Y =c(rrf.a,rrf.b)
+    #   
+    #   rrf.df <- data.frame(predicted, true, rrf.Y)
+    #   
+    #   ggplot(data =  rrf.df, mapping = aes(x = predicted, y =true )) +
+    #     geom_tile(aes(fill = rrf.Y), colour = "white") +
+    #     geom_text(aes(label = sprintf("%1.0f", rrf.Y)), vjust = 1) +
+    #     scale_fill_gradient2(mid="light blue", high = "blue") +
+    #     theme_bw() + theme(legend.position = "none")
+    #   
+    # })
+    # 
     output$roc.rf <- renderPrint({
         calculateROCMeasures(pred.rf())
     })
