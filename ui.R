@@ -66,20 +66,17 @@ Amount and time have been centered and reduced(mean equals 0) for all variables.
            sliderInput("size","Choose Smote sample size",
                        1000,140000,value=80000,round = T),
            
-           sliderInput("kn","Number of the closest neighbours are considered for synthesis
-                             new cases of fraud",
+           sliderInput("kn","The value of parameter K for nearest neighbor process used for generating data",
                        3,10,value=4),
-           sliderInput("prop","Number of times existing data points get reused for 
-                             synthesis new cases of fraud",
+           sliderInput("prop","he maximum times of synthetic minority instances over original majority in-stances in the oversampling",
                        50,100,value=90,round = T),
            
-           h4("distribution of the database after rebalancing"),
+           h4("Distribution of the database after rebalancing"),
            dataTableOutput("smote"),
            
            br(),
            
-           h4("After rebalancing the database we will split it into two parts. 
-              A test sample that made up 30 percent of our samples and a learning sample for the other 70 percent"),
+           h4("After rebalancing the database we will split it into two parts: a test sample that makes up 30 percent of our samples and a learning sample for the other 70 percent"),
            br(),
            
            h4("Features selection"),
