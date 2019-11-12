@@ -20,10 +20,10 @@ shinyUI(fluidPage(
         h1("I.Data Visualisation"),
            br(),
            br(),
-           h4("our database contains the list of clients of a bank. 
-              Customers can be categorized into two groups, which are customers in fraud situations and non-fraud customers."),
+           h4("Our database contains the list of clients of a well-known bank. These customers are classed as being fraudulent(1) or non-fraudulent(0).In the following presentation we will implement new techniques
+in order to ameliorate the fraud system model."),
            br(),
-           h3("1.first view of the database"),
+           h3("1.First view of the database"),
            br(),
            h4("the database contains 31 variables. the variable time, the variable amounts, 
               the variable class and the 28 other variables are main components.
