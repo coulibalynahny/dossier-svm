@@ -15,9 +15,9 @@ shinyUI(fluidPage(
     
     navlistPanel(
     
-    tabPanel("I.data visualisation",
+    tabPanel("I.Data Visualisation",
              
-        h1("I.data visualisation"),
+        h1("I.Data Visualisation"),
            br(),
            br(),
            h4("our database contains the list of clients of a bank. 
