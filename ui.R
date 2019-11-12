@@ -155,13 +155,20 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  br(),
                  h3("Second solution: k fold cross validation"),
                  br(),
-                 h4("The original sample is divided into k samples, then one of the k samples is selected as the validation set and the other k-1 samples are the training set. The performance score is calculated,the probability of making a classification error is evaluated. We look for the value of C which minimizes the average of the probabilities of errors. and the operation is repeated by selecting another validation sample from the k-1 samples that have not yet been used for model validation. The operation is repeated k times so that ultimately each sub-sample has been used exactly once as a validation set."),
-                 h3("hyperparameters's choise"),
+                 h4("The original sample is divided into k samples, then one of the k samples is selected as the validation set and the other k-1 samples are the training set. 
+                    The performance score is calculated,the probability of making a classification error is evaluated. We are looking for the value of C which minimizes the average of the probabilities of errors. and the operation is repeated by selecting another validation sample from the k-1 samples that have not yet been used for model validation. 
+                    The operation is repeated k times so that ultimately each sub-sample has been used exactly once as a validation set."),
+                 br(),
+                 h3("Most classification problems are non-linear separations. But the data space can always be plunged into a larger space in which the data can be linearly separated "),
+                 h2("Kernel trick"),
+                 br(),
+                 h4("In practice, the kernel trick consists in choosing a kernel function, which represents the scalar product associated with the intermediate representation space without necessarily characterizing the space and the transformation function."),
+                 h3("Hyperparameters's choice"),
                  
-                 sliderInput("cost.param","choice of cost parameters",
+                 sliderInput("cost.param","Choice of cost parameters",
                              0,10,value=1,round = T),
                  
-                 selectInput("kernel.param", "choice of kernel", 
+                 selectInput("kernel.param", "Choice of kernel", 
                              choices= c("linear","sigmoid","polynomial","radial")),
                  
                  h3("Absolute confusion matrix"),
@@ -173,70 +180,70 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  h4("ROC measures"),
                  verbatimTextOutput("roc.svm"),
                  
-                 h4("Precision/recall graph"),
+                 h4("Precision/Recall graph"),
                  plotlyOutput("graph1.svm"),
                  
-                 h4("Sensitivity/specificity graph"),
+                 h4("Sensitivity/Specificity graph"),
                  plotlyOutput("graph2.svm"),
                  
-                 h4("roc curve"),
+                 h4("Roc curve"),
                  plotlyOutput("graph3.svm")
                  
         ),
         
         #logistic regression
-        tabPanel("IV.logistic regression",
-                 h2("IV.logistic regression model"),
+        tabPanel("IV.Logistic regression",
+                 h2("IV.Logistic regression model"),
                  
                  
-                 h3("absolute confusion matrix"),
+                 h3("Absolute Confusion Matrix"),
                  plotOutput("matrix.lg"),
                  
                  # 
-                 # h3("relatrive confusion matrix"),
+                 # h3("Relative Confusion Matrix"),
                  # plotOutput("rmatrix.lg"),
                  
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.lg"),
                  
-                 h4("Precision/recall graph"),
+                 h4("Precision/Recall graph"),
                  plotlyOutput("graph1.lg"),
                  
-                 h4("Sensitivity/specificity graph"),
+                 h4("Sensitivity/Specificity graph"),
                  plotlyOutput("graph2.lg"),
                  
-                 h4("roc curve"),
+                 h4("Roc curve"),
                  plotlyOutput("graph3.lg")
                  
         ),
         # decision tree
-        tabPanel("V.decision tree",
+        tabPanel("V.Decision Tree",
                  
-                 h1("V.decision tree"),
+                 h1("V.Decision Tree"),
                  
-                 h5("construction of the decision tree"),
+                 h5("Construction of the decision tree"),
                  
                  plotOutput("tree"),
                  
-                 h3("the result analysis"),
+                 h3("Result analysis"),
                  
-                 h3("Absolute confusion matrix"),
+                 h3("Absolute Confusion Matrix"),
                  plotOutput("amatrix.tree"),
                  # 
-                 # h3("Relative confusion matrix"),
+                 # h3("Relative Confusion Matrix"),
                  # plotOutput("rmatrix.tree"),
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.tree"),
                  
-                 h4("Precision/recall graph"),
+                 h4("Precision/Recall graph"),
                  plotlyOutput("graph1.tree"),
                  
-                 h4("Sensitivity/specificity graph"),
+                 h4("Sensitivity/Specificity graph"),
                  plotlyOutput("graph2.tree"),
                  
-                 h4("roc curve"),
+                 h4("Roc curve"),
                  plotlyOutput("graph3.tree")
                  
         ),
@@ -245,60 +252,60 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
         
         
         #random forest
-        tabPanel("VI.random forest",
+        tabPanel("VI.Random Forest",
                  
-                 h1("VI.random forest model"),
+                 h1("VI.Random Forest Model"),
                  
-                 h3("choice of hyperparameters"),
+                 h3("Choice of hyperparameters"),
                  
-                 sliderInput("ntree.param","Number of tree",
+                 sliderInput("ntree.param","Number of trees",
                              100,500,value=200,round = T),
                  
                  sliderInput("mtry.param", "Number of variables randomly sampled as candidates at each split", 
                              3,8,value=5),
                  
-                 h4("Absolute confusion matrix"),
+                 h4("Absolute Confusion Matrix"),
                  plotOutput("amatrix.rf"),
                  # 
-                 # h4("relative confusion matrix"),
+                 # h4("Relative Confusion Matrix"),
                  # plotOutput("ramatrix.rf"),
                  # 
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.rf"),
                  
-                 h4("Precision/recall graph"),
+                 h4("Precision/Recall graph"),
                  plotlyOutput("graph1.rf"),
                  
-                 h4("Sensitivity/specificity graph"),
+                 h4("Sensitivity/Specificity graph"),
                  plotlyOutput("graph2.rf"),
                  
-                 h4("roc curve"),
+                 h4("Roc curve"),
                  plotlyOutput("graph3.rf")
                  
         ),
       
         # model comparision
-        tabPanel("VII.model comparison",
+        tabPanel("VII.Model Comparison",
                  
-                 h1("VII.comparison of different models"),
-                 h5("We chose to re-sample the model in two ways that are: k-fold and holdout. "),
-                 h4("resampling using k-fold method"),
-                 sliderInput("k","chose your K ",0,10,value=5,round = T),
+                 h1("VII.Comparison of different models"),
+                 h5("We chose to re-sample the model in two ways: k-fold and holdout. "),
+                 h4("Resampling using the k-fold method"),
+                 sliderInput("k","Choose your K ",0,10,value=5,round = T),
                  verbatimTextOutput("bmr1"),
                  
-                 h4("Precision/recall graph"),
+                 h4("Precision/Recall graph"),
                  plotlyOutput("graph1.bmr"),
                  
-                 h4("Sensitivity/specificity graph"),
+                 h4("Sensitivity/Specificity graph"),
                  plotlyOutput("graph2.bmr"),
                  
-                 h4("roc curve"),
+                 h4("Roc curve"),
                  plotlyOutput("graph3.bmr"),
                  # 
                  # plotOutput("bmri"),
                  
-                 h4("distribution of performance values across resampling iterations for
+                 h4("Distribution of performance values across resampling iterations for
                     one performance measure and for all learners"),
                  plotOutput("bmrplot")
                  
