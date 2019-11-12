@@ -18,9 +18,9 @@ library(plotly)
 
 # DT=read.csv("C:/Users/nahny/Documents/GitHub/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
 
-DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+#DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
 
-# DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
+DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
 
 set.seed(123234)
 DT$Amount=as.vector(scale(DT$Amount))
@@ -44,9 +44,15 @@ row.names(mat)<-c("Number","Proportion (in %)")
 mat[2,]<-round(mat[2,],4)*100
  
 
+
+# data splitting
+intrain=createDataPartition(DT$Class, p = 0.7,list=FALSE)
+DT.train=as.data.frame(DT[intrain,])
+data.test=as.data.frame(DT[-intrain,])
+
 shinyServer(function(input, output) {
     
-    ## PARTIR NAHNY
+    ## PARTIE NAHNY
     output$tableDT2<-renderDT({
          DT::datatable(table_prop,list(dom = 't'))
     })
@@ -62,22 +68,22 @@ shinyServer(function(input, output) {
     # table DT
     output$tabletrain1 <- renderDT({ DT::datatable(mat,list(dom = 't')) })
   
-    # creation of smote database 
-    DT.smote <- reactive({
-        DT.smote=smotefamily::SMOTE(DT[,-31], DT[,31], K = input$kn, 
+    # creation of smote data train 
+    data.train <- reactive({
+        data.train=smotefamily::SMOTE(DT.train[,-31], DT.train[,31], K = input$kn, 
                                     dup_size = input$prop)$data
-        names(DT.smote)[31]="Class"
+        names(data.train)[31]="Class"
         
         set.seed(12345)
-        s=sample(1:nrow(DT.smote),input$size)
-        DT.smote=DT.smote[s,]
-        return(DT.smote)
+        s=sample(1:nrow(data.train),input$size)
+        data.train=data.train[s,]
+        return(data.train)
     }) 
     
     output$smote <- renderDT({
         
-        ab=table(DT.smote()$Class)
-        ab1= prop.table(table(DT.smote()$Class))
+        ab=table(data.train()$Class)
+        ab1= prop.table(table(data.train()$Class))
         at=rbind(ab,ab1)
         row.names(at)<-c("Number","Proportion (in %)")
         at[2,]<-round(at[2,],4)*100
@@ -86,36 +92,16 @@ shinyServer(function(input, output) {
     })
     
     
-    # 
-    # # table data.train
-    # output$smote <- renderPrint({
-    #     table(DT.smote()$Class)
-    # })
-    # output$smote.prop <- renderPrint({
-    #     prop.table(table(DT.smote()$Class))
-    # })
-    
-    
-    # splitting train (70%) / test (30%)
-    inTrain <- reactive({ createDataPartition(DT.smote()$Class, p = 0.7,list=FALSE) }) 
-    data.train <- reactive({ DT.smote()[inTrain(),]  }) 
-    data.test <- reactive({ DT.smote()[-inTrain(),]  }) 
-    
-    
-    ###############################################################################
+   #########################################################################
     # MODELISATION
     ###############################################################################
     
-    
-    
-    # dans le package mlr on definit une tache qui permet de specifier une fois pour toute le probleme que nous traitons
-    #cest a dire la base de donee utilisee, la variable cible et la modalite cible
     train.task <- reactive({
-        makeClassifTask(data=data.test(),target="Class",positive = "Fraud")
+        makeClassifTask(data=data.train(),target="Class",positive = "Fraud")
     })
     
     test.task <- reactive({
-        makeClassifTask(data=data.test(),target="Class",positive = "Fraud")
+        makeClassifTask(data=data.test,target="Class",positive = "Fraud")
     })
     
     filter <- reactive({
@@ -127,6 +113,7 @@ shinyServer(function(input, output) {
         des=mlr::plotFilterValues(filter(),n.show=10)
         plotly_build(des)
     }) 
+    
     
     
     #logistic regression 
@@ -572,5 +559,8 @@ shinyServer(function(input, output) {
     #     
     #     
     # })
+    
+    
+    
     
 })
