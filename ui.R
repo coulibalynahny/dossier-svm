@@ -89,7 +89,7 @@ Amount and time have been centered and reduced(mean equals 0) for all variables.
     ###################
     # fin des modifications !!!!!
     
-         #       h2("III.the models"),
+         #       h2("III.The models"),
 
         
         
@@ -154,6 +154,8 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  h4("3.The next step is to determine the value of C that minimizes the probability of misclassification measured on the validation sample."),
                  br(),
                  h3("Second solution: k fold cross validation"),
+                 br(),
+                 h4("The original sample is divided into k samples, then one of the k samples is selected as the validation set and the other k-1 samples are the training set. The performance score is calculated,the probability of making a classification error is evaluated. We look for the value of C which minimizes the average of the probabilities of errors. and the operation is repeated by selecting another validation sample from the k-1 samples that have not yet been used for model validation. The operation is repeated k times so that ultimately each sub-sample has been used exactly once as a validation set."),
                  h3("hyperparameters's choise"),
                  
                  sliderInput("cost.param","choice of cost parameters",
