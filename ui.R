@@ -137,9 +137,9 @@ For a linearly separable sample, there may be several linear classifiers ( sever
                  h3("It is now assumed that the training sample is not linearly separable.
 Two cases:"),
                  br(),
-                 h3("1. The sample is almost linearly separable: the 'optimal' separation is
+                 h4("1. The sample is almost linearly separable: the 'optimal' separation is
 linear, but some observations can not be correctly classified."),
-                 h3("2.The sample is not linearly separable: the 'optimal' separation is
+                 h4("2.The sample is not linearly separable: the 'optimal' separation is
                     non-linear."),
                  h4("1.In the case of an almost linearly separable sample, we introduce n relaxation variables of the classification constraints yi h (xi)> 1, which are called slack variables and which are well
 classified but below the margin if they are between 0 and 1, or even poorly classified, if they exceed 1.
