@@ -566,14 +566,27 @@ shinyServer(function(input, output) {
       logreg = pred.lg(),
       tree = pred.tree(),
       randomForest = pred.rf(),
-      svm = svm.pred()), 
+      svm = pred.svm()), 
       measures = list(fpr, tpr, ppv, tnr,mmce))
     })
     
-    output$graph1.bmr <- renderPlotly({
-      ta= plotROCCurves(df.bmr(), measures = list(tpr, ppv), diagonal = FALSE)
-      plotly_build(ta)
-      #ggplot(df.bmr()$data)+geom_line(aes(x=tpr,y=ppv))+theme_bw()
+    output$graph1.compar <- renderPlotly({
+      pc1= plotROCCurves(compar(), measures = list(tpr, ppv), diagonal = FALSE)
+      plotly_build(pc1)
+
     })
+    output$graph2.compar <- renderPlotly({
+      pc2=plotROCCurves(df.bmr(), measures = list(tnr, tpr), diagonal = FALSE)
+      plotly_build(pc2)
+      
+    })
+    output$graph3.compar <- renderPlotly({
+      pc3=plotROCCurves(df.bmr(), measures = list(fpr, tpr), diagonal = TRUE)
+      plotly_build(pc3)
+    
+    })
+    
+    
+    
     
 })

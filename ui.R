@@ -286,10 +286,10 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
         ),
       
         # model comparision
-        tabPanel("VII.Model Comparison",
+        tabPanel("VII.Model Comparison using cross validation in training set",
                  
                  h1("VII.Comparison of different models"),
-                 h5("We chose to re-sample the model in two ways: k-fold and holdout. "),
+                 
                  h4("Resampling using the k-fold method"),
                  sliderInput("k","Choose your K ",0,10,value=5,round = T),
                  verbatimTextOutput("bmr1"),
@@ -302,14 +302,31 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  
                  h4("Roc curve"),
                  plotlyOutput("graph3.bmr"),
-                 # 
-                 # plotOutput("bmri"),
+              
                  
                  h4("Distribution of performance values across resampling iterations for
                     one performance measure and for all learners"),
                  plotOutput("bmrplot")
                  
-        )
+        ),
+    # model comparision
+    tabPanel("IX.Model Comparison on test set",
+             
+             h4("We compare the performance of our model on testing set 
+                which is not used for model implementation"),
+        
+             
+             h4("Precision/Recall graph"),
+             plotlyOutput("graph1.compar"),
+             
+             h4("Sensitivity/Specificity graph"),
+             plotlyOutput("graph2.compar"),
+             
+             h4("Roc curve"),
+             plotlyOutput("graph3.compar")
+    )
+          
+             
         
         
         
