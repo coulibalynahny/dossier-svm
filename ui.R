@@ -30,29 +30,26 @@ in order to ameliorate the fraud system model."),
            br(),
            dataTableOutput("tableDTt"),
            br(),
-           h3("2.some descriptive statistics"),
+           h3("2.Some descriptive statistics"),
            br(),
-           h4("We look at some basic descriptive statistics to analyze the variables that make up our models. On the first page of the table we see the statistics for the first two variables. 
-              To see the static of the other variables, go to the following pages"),
+           h4("We are looking now at some basic descriptive statistics to analyze the variables that make up our model. On the first page of the table we see the statistics for the first two variables. To see the statistics of the other variables, go to the following pages.As you can see, the variables 
+Amount and time have been centered and reduced(mean equals 0) for all variables.The main composants are centered and reduced from the beginning."),
            br(),
            dataTableOutput("tableDTs")
        
         ),
         
-    tabPanel("II.rebalancing",
+    tabPanel("II.Rebalancing",
              
-        h1("II.rebalance database"),
+        h1("II.Rebalance the database"),
                  
                  h3("1.Class distribution in the Original database"),
            
                br(),
            
-                 h4("our database contains a total of 284808 observations including 
-              492 observations for individuals in a fraud situation and the rest for individuals in non-fraud situations. Which allows us to notice that our database is not balanced. 
-              We have 99.83% of non fraud and 0.17% of fraud. before any modeling, we will rebalance the database to implement the calculations more easily"),
-                 h4("Because when a database is unbalanced than pushing the model to predict the most prevalent modality. 
-                    To rebalance the database we use the smote function"),
-           
+                 h4("Our database contains a total of 284808 observations including 492 observations for individuals in a fraud situation and the rest for individuals in non-fraud situations,which allows us to notice that our database is unbalanced. We have a 99.83% proportion of non-fraud and 0.17% proportion of fraud. 
+                    Before issuing any Data Modeling Technique,we will rebalance the database in order to have accurate results."),
+                 h4("When a database is unbalanced the model is conducive to predict the most prevailing modality."),
                  br(),
                  dataTableOutput("tableDT2"),
            ###################################################################
@@ -64,8 +61,7 @@ in order to ameliorate the fraud system model."),
                 dominates the other.
                 So we create a new rebalanced datasets using SMOTE 
                     :Synthetic Minority Over-sampling Technique."),    
-           "SMOTE synthesises new minority instances between existing (real) minority instances.",
-           
+           "SMOTE is a oversampling technique which synthesizes a new minority instance between a pair of one minority instance and one of its K nearest neighbor.",
            br(),
            sliderInput("size","Choose Smote sample size",
                        1000,140000,value=80000,round = T),
