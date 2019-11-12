@@ -507,7 +507,7 @@ shinyServer(function(input, output) {
     })
     
     
-    # benchmarking
+    # benchmarking on smote data sets 
     rdesc=reactive({ makeResampleDesc("CV", iters = input$k, stratify = TRUE)
     })
     
@@ -561,6 +561,19 @@ shinyServer(function(input, output) {
     # })
     
     
+    compar = reactive({  generateThreshVsPerfData(list(
+      
+      logreg = pred.lg(),
+      tree = pred.tree(),
+      randomForest = pred.rf(),
+      svm = svm.pred()), 
+      measures = list(fpr, tpr, ppv, tnr,mmce))
+    })
     
+    output$graph1.bmr <- renderPlotly({
+      ta= plotROCCurves(df.bmr(), measures = list(tpr, ppv), diagonal = FALSE)
+      plotly_build(ta)
+      #ggplot(df.bmr()$data)+geom_line(aes(x=tpr,y=ppv))+theme_bw()
+    })
     
 })
