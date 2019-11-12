@@ -25,10 +25,8 @@ in order to ameliorate the fraud system model."),
            br(),
            h3("1.First view of the database"),
            br(),
-           h4("the database contains 31 variables. the variable time, the variable amounts, 
-              the variable class and the 28 other variables are main components.
-              We present in the following table a small preview of our database. 
-              In this table we can see the variables time, amount, class and the first five main components"),
+           h4("The database includes 31 variables:the variable time, the variable amounts, the variable class and the 28 other variables are main components.
+              We will present in the following table a preview of a part of our database variables: time, amount, class and the first five main components"),
            br(),
            dataTableOutput("tableDTt"),
            br(),
