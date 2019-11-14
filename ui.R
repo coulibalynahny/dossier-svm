@@ -76,7 +76,7 @@ Amount and time have been centered and reduced(mean equals 0) for all variables.
            
            br(),
            
-           h4(" We will split our Database into two parts: a test sample that makes up 30 percent of our sample and a learning sample for the other 70 percent and then we're rebalancing the learning sample using the Smote Function"),
+           h4(" We will split our Database into two parts: a test sample that makes up 30 percent of our sample and a training sample for the other 70 percent and then we're rebalancing the learning sample using the Smote Function"),
            br(),
            
            h4("Features selection"),
