@@ -68,7 +68,7 @@ Amount and time have been centered and reduced(mean equals 0) for all variables.
            
            sliderInput("kn","The value of parameter K for nearest neighbor process used for generating data",
                        3,10,value=4),
-           sliderInput("prop","he maximum times of synthetic minority instances over original majority in-stances in the oversampling",
+           sliderInput("prop","The maximum times of synthetic minority instances over original majority in-stances in the oversampling",
                        50,100,value=90,round = T),
            
            h4("Distribution of the database after rebalancing"),
@@ -76,7 +76,7 @@ Amount and time have been centered and reduced(mean equals 0) for all variables.
            
            br(),
            
-           h4("After rebalancing the database we will split it into two parts: a test sample that makes up 30 percent of our samples and a learning sample for the other 70 percent"),
+           h4(" We will split our Database into two parts: a test sample that makes up 30 percent of our sample and a learning sample for the other 70 percent and then we're rebalancing the learning sample using the Smote Function"),
            br(),
            
            h4("Features selection"),
@@ -310,7 +310,7 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  
         ),
     # model comparision
-    tabPanel("IX.Model Comparison on test set",
+    tabPanel("VIII.Model Comparison on test set",
              
              h4("We compare the performance of our model on testing set 
                 which is not used for model implementation"),
