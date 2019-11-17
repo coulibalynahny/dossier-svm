@@ -18,7 +18,7 @@ library(plotly)
 
 DT=read.csv("C:/Users/nahny/Documents/GitHub/creditcard.csv", stringsAsFactors = FALSE )
 
-DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+#DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
 
 #DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
 
@@ -52,7 +52,7 @@ data.test=as.data.frame(DT[-intrain,])
 
 shinyServer(function(input, output) {
     
-    ## PARTIE NAHNY
+    ## 
     output$tableDT2<-renderDT({
          DT::datatable(table_prop,list(dom = 't'))
     })
@@ -151,7 +151,7 @@ shinyServer(function(input, output) {
         ggplot(data =  df, mapping = aes(x = predicted, y =true )) +
           geom_tile(aes(fill = Y), colour = "white") +
           geom_text(aes(label = sprintf("%1.0f", Y)), vjust = 1) +
-          scale_fill_gradient2(mid="light blue", high = "blue") +
+          scale_fill_gradient(low = "light blue", high = "green") +
           theme_bw() + theme(legend.position = "none")
   
     })
@@ -259,7 +259,7 @@ shinyServer(function(input, output) {
       ggplot(data =  atdf, mapping = aes(x = predicted, y =true )) +
         geom_tile(aes(fill = atY), colour = "white") +
         geom_text(aes(label = sprintf("%1.0f", atY)), vjust = 1) +
-        scale_fill_gradient2(mid="light blue", high = "blue") +
+        scale_fill_gradient(low = "light blue", high = "green") +
         theme_bw() + theme(legend.position = "none")
       
       
@@ -354,7 +354,7 @@ shinyServer(function(input, output) {
       ggplot(data =  svm.df, mapping = aes(x = predicted, y =true )) +
         geom_tile(aes(fill = svm.Y), colour = "white") +
         geom_text(aes(label = sprintf("%1.0f", svm.Y)), vjust = 1) +
-        scale_fill_gradient2(mid="light blue", high = "blue") +
+        scale_fill_gradient(low = "light blue", high = "green") +
         theme_bw() + theme(legend.position = "none")
 
       })
@@ -452,7 +452,7 @@ shinyServer(function(input, output) {
       ggplot(data =  rf.df, mapping = aes(x = predicted, y =true )) +
         geom_tile(aes(fill = rf.Y), colour = "white") +
         geom_text(aes(label = sprintf("%1.0f", rf.Y)), vjust = 1) +
-        scale_fill_gradient2(mid="light blue", high = "blue") +
+        scale_fill_gradient(low = "light blue", high = "green") +
         theme_bw() + theme(legend.position = "none")
       
     })

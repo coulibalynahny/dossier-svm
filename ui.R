@@ -64,7 +64,7 @@ Amount and time have been centered and reduced(mean equals 0) for all variables.
            "SMOTE is a oversampling technique which synthesizes a new minority instance between a pair of one minority instance and one of its K nearest neighbor.",
            br(),
            sliderInput("size","Choose Smote sample size",
-                       1000,10000,value=5000,round = T),
+                       1000,10000,value=8200,round = T),
            
            sliderInput("kn","The value of parameter K for nearest neighbor process used for generating data",
                        3,10,value=4),
