@@ -18,7 +18,7 @@ library(plotly)
 
 DT=read.csv("C:/Users/nahny/Documents/GitHub/creditcard.csv", stringsAsFactors = FALSE )
 
-#DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
+DT=read.csv("C:/Users/pierr/Desktop/svm/dossier-svm/creditcard.csv", stringsAsFactors = FALSE )
 
 #DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
 
