@@ -23,7 +23,7 @@ r_packages:
   - rpart.plot
   - e1071
   - caret
-  - DMwR
+  - smotefamily
   - FSelectorRcpp
   - randomForest
   - data.table
