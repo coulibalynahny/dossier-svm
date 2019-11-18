@@ -1,5 +1,5 @@
 # UI
-#library(plotly)
+
 library(shiny)
 library(shinythemes)
 library(ggplot2)
@@ -84,7 +84,7 @@ Amount and time have been centered and reduced(mean equals 0) for all variables.
            h4("Features selection"),
            "Entropy-based Filters: Algorithms that find ranks of importance of 
            discrete attributes, basing on their entropy with a continous class attribute",
-           #plotlyOutput("filtre")
+           
            
            
         ),
@@ -175,21 +175,19 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  
                  h3("Absolute confusion matrix"),
                  plotOutput("amatrix.svm"),
-                 # 
-                 # h3("Relative confusion matrix"),
-                 # plotOutput("rmatrix.svm"),
+                
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.svm"),
                  
                  h4("Precision/Recall graph"),
-                 #plotlyOutput("graph1.svm"),
+                 
                  
                  h4("Sensitivity/Specificity graph"),
-                 #plotlyOutput("graph2.svm"),
+                
                  
                  h4("Roc curve"),
-                 #plotlyOutput("graph3.svm")
+                
                  
         ),
         
@@ -210,13 +208,10 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  verbatimTextOutput("roc.lg"),
                  
                  h4("Precision/Recall graph"),
-                 #plotlyOutput("graph1.lg"),
                  
                  h4("Sensitivity/Specificity graph"),
-                 #plotlyOutput("graph2.lg"),
                  
                  h4("Roc curve")
-                 #plotlyOutput("graph3.lg")
                  
         ),
         # decision tree
@@ -232,21 +227,16 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  
                  h3("Absolute Confusion Matrix"),
                  plotOutput("amatrix.tree"),
-                 # 
-                 # h3("Relative Confusion Matrix"),
-                 # plotOutput("rmatrix.tree"),
+               
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.tree"),
                  
                  h4("Precision/Recall graph"),
-                 #plotlyOutput("graph1.tree"),
                  
                  h4("Sensitivity/Specificity graph"),
-                 #plotlyOutput("graph2.tree"),
                  
                  h4("Roc curve")
-                 #plotlyOutput("graph3.tree")
                  
         ),
         
@@ -268,49 +258,20 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  
                  h4("Absolute Confusion Matrix"),
                  plotOutput("amatrix.rf"),
-                 # 
-                 # h4("Relative Confusion Matrix"),
-                 # plotOutput("ramatrix.rf"),
-                 # 
+               
                  
                  h4("ROC measures"),
                  verbatimTextOutput("roc.rf"),
                  
                  h4("Precision/Recall graph"),
-                 #plotlyOutput("graph1.rf"),
+                
                  
                  h4("Sensitivity/Specificity graph"),
-                 #plotlyOutput("graph2.rf"),
                  
                  h4("Roc curve")
-                 #plotlyOutput("graph3.rf")
                  
         ),
       
-        # model comparision
-       # tabPanel("VII.Model Comparison using cross validation in training set",
-        #         
-         #        h1("VII.Comparison of different models"),
-          #       
-           #      h4("Resampling using the k-fold method"),
-            #     sliderInput("k","Choose your K ",0,10,value=5,round = T),
-             #    verbatimTextOutput("bmr1"),
-              #   
-               #  h4("Precision/Recall graph"),
-                # plotlyOutput("graph1.bmr"),
-                 
-                # h4("Sensitivity/Specificity graph"),
-               #  plotlyOutput("graph2.bmr"),
-                 
-                # h4("Roc curve"),
-                # plotlyOutput("graph3.bmr"),
-              
-                 
-                 #h4("Distribution of performance values across resampling iterations for
-                  #  one performance measure and for all learners"),
-                 #plotOutput("bmrplot")
-                 
-       # ),
     # model comparision
     tabPanel("VIII.Model Comparison on test set",
              
