@@ -1,6 +1,7 @@
 # SERVER
 
 #library(plotly)
+library(plotly)
 library(shiny)
 library(mlr)
 library(rpart)
@@ -14,14 +15,7 @@ library(data.table)
 library(DT)
 library(ggplot2)
 
-
-# chemin d'acces C:\Users\nahny\Documents\GitHub
-
-#DT=read.csv("C:/Users/nahny/Documents/GitHub/creditcard.csv", stringsAsFactors = FALSE )
-
 DT=readRDS("templatePDF/creditcard.rds")
-
-#DT=read.csv("C:/Users/33668/Documents/MASTER 2 ESA/projet svm/app_0611/creditcard.csv", stringsAsFactors = FALSE )
 
 set.seed(123234)
 DT$Amount=as.vector(scale(DT$Amount))
@@ -492,11 +486,11 @@ shinyServer(function(input, output) {
       measures = list(fpr, tpr, ppv, tnr,mmce))
     })
     
-    #output$graph1.compar <- renderPlotly({
-     # pc1= plotROCCurves(compar(), measures = list(tpr, ppv), diagonal = FALSE)
-     # plotly_build(pc1)
-
-  #  })
+    output$graph1.compar <- renderPlotly({
+     pc1= plotROCCurves(compar(), measures = list(tpr, ppv), diagonal = FALSE)
+     plotly_build(pc1)
+     })
+    
    # output$graph2.compar <- renderPlotly({
     #  pc2=plotROCCurves(compar(), measures = list(tnr, tpr), diagonal = FALSE)
      # plotly_build(pc2)

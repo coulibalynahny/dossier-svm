@@ -1,5 +1,5 @@
 # UI
-
+library(plotly)
 library(shiny)
 library(shinythemes)
 library(ggplot2)
@@ -54,8 +54,7 @@ Amount and time have been centered and reduced(mean equals 0) for all variables.
                  h4("When a database is unbalanced the model is conducive to predict the most prevailing modality."),
                  br(),
                  dataTableOutput("tableDT2"),
-           ###################################################################
-           # debut modifications !!!!
+          
            br(),
            h3("2.Distribution of Class in the SMOTE database"),
            br(),
@@ -88,8 +87,7 @@ Amount and time have been centered and reduced(mean equals 0) for all variables.
            
            
         ),
-    ###################
-    # fin des modifications !!!!!
+    
     
          #       h2("III.The models"),
 
@@ -198,20 +196,11 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  
                  h3("Absolute Confusion Matrix"),
                  plotOutput("matrix.lg"),
-                 
-                 # 
-                 # h3("Relative Confusion Matrix"),
-                 # plotOutput("rmatrix.lg"),
-                 
+              
                  
                  h4("ROC measures"),
-                 verbatimTextOutput("roc.lg"),
-                 
-                 h4("Precision/Recall graph"),
-                 
-                 h4("Sensitivity/Specificity graph"),
-                 
-                 h4("Roc curve")
+                 verbatimTextOutput("roc.lg")
+                
                  
         ),
         # decision tree
@@ -230,13 +219,9 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                
                  
                  h4("ROC measures"),
-                 verbatimTextOutput("roc.tree"),
+                 verbatimTextOutput("roc.tree")
                  
-                 h4("Precision/Recall graph"),
-                 
-                 h4("Sensitivity/Specificity graph"),
-                 
-                 h4("Roc curve")
+                
                  
         ),
         
@@ -261,14 +246,8 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                
                  
                  h4("ROC measures"),
-                 verbatimTextOutput("roc.rf"),
-                 
-                 h4("Precision/Recall graph"),
+                 verbatimTextOutput("roc.rf")
                 
-                 
-                 h4("Sensitivity/Specificity graph"),
-                 
-                 h4("Roc curve")
                  
         ),
       
@@ -280,12 +259,12 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
         
              
              h4("Precision/Recall graph"),
-            #plotOutput("graph1.compar"),
+            plotlyOutput("graph1.compar"),
              
              h4("Sensitivity/Specificity graph"),
              #plotOutput("graph2.compar"),
              
-             h4("Roc curve"),
+             h4("Roc curve")
              #plotOutput("graph3.compar")
     )
           
