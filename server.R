@@ -182,34 +182,34 @@ shinyServer(function(input, output) {
     })
     
     
-    df.lg <- reactive({ generateThreshVsPerfData(pred.lg(),
-                                                 measures = list(fpr, tpr, ppv, tnr,mmce))
-    })
+   #df.lg <- reactive({ generateThreshVsPerfData(pred.lg(),
+    #                                             measures = list(fpr, tpr, ppv, tnr,mmce))
+    #})
     
     
-    output$graph1.lg <- renderPlotly({
+    #output$graph1.lg <- renderPlotly({
         #plotROCCurves(df.lg(), measures = list(tpr, ppv), diagonal = FALSE)
-        pli1=ggplot(df.lg()$data)+geom_line(aes(x=tpr,y=ppv),color="orange")+theme_bw()+
-            xlab("True positive rate")+ylab("positive predict rate")
-        plotly_build(pli1)
+     #   pli1=ggplot(df.lg()$data)+geom_line(aes(x=tpr,y=ppv),color="orange")+theme_bw()+
+      #      xlab("True positive rate")+ylab("positive predict rate")
+       # plotly_build(pli1)
         
-    })
+    #})
     
-    output$graph2.lg <- renderPlotly({
+    #output$graph2.lg <- renderPlotly({
         #plotROCCurves(df.lg(), measures = list(tnr, tpr), diagonal = FALSE)
-        pli2=ggplot(df.lg()$data)+geom_line(aes(x=tnr,y=tpr),color="orange")+theme_bw()+
-            xlab("True negative rate")+ylab("True positive rate")
-        plotly_build(pli2)
+    #    pli2=ggplot(df.lg()$data)+geom_line(aes(x=tnr,y=tpr),color="orange")+theme_bw()+
+     #       xlab("True negative rate")+ylab("True positive rate")
+      #  plotly_build(pli2)
         
-    })
+    #})
     
-    output$graph3.lg <- renderPlotly({
+    #output$graph3.lg <- renderPlotly({
         #plotROCCurves(df.lg(), measures = list(fpr, tpr), diagonal = TRUE)
-        pli3=ggplot(df.lg()$data)+geom_line(aes(x=fpr,y=tpr),color="orange")+theme_bw()+
-            xlab("False positive rate")+ylab("True positive rate")
-        plotly_build(pli3)
+     #   pli3=ggplot(df.lg()$data)+geom_line(aes(x=fpr,y=tpr),color="orange")+theme_bw()+
+      #      xlab("False positive rate")+ylab("True positive rate")
+      #  plotly_build(pli3)
         
-    })
+    #})
     
     
     
@@ -290,29 +290,29 @@ shinyServer(function(input, output) {
     })
     
     
-    df.tree <- reactive({ generateThreshVsPerfData(pred.tree(),
-                                                 measures = list(fpr, tpr, ppv, tnr,mmce))
-    })
+   # df.tree <- reactive({ generateThreshVsPerfData(pred.tree(),
+    #                                             measures = list(fpr, tpr, ppv, tnr,mmce))
+    #})
     
     
-    output$graph1.tree <- renderPlotly({
+    #output$graph1.tree <- renderPlotly({
         # plotROCCurves(df.tree(), measures = list(tpr, ppv), diagonal = FALSE)
-        pp=ggplot(df.tree()$data)+geom_line(aes(x=tpr,y=ppv),color="blue")+theme_bw()
-        plotly_build(pp)
+     #   pp=ggplot(df.tree()$data)+geom_line(aes(x=tpr,y=ppv),color="blue")+theme_bw()
+      #  plotly_build(pp)
         
-    })
+    #})
     
-    output$graph2.tree <- renderPlotly({
+    #output$graph2.tree <- renderPlotly({
         # plotROCCurves(df.tree(), measures = list(tnr, tpr), diagonal = FALSE)
-        bbp= ggplot(df.tree()$data)+geom_line(aes(x=tnr,y=tpr),color="blue")+theme_bw()
-        plotly_build(bbp)
-    })
+     #   bbp= ggplot(df.tree()$data)+geom_line(aes(x=tnr,y=tpr),color="blue")+theme_bw()
+      #  plotly_build(bbp)
+    #})
     
-    output$graph3.tree <- renderPlotly({
+    #output$graph3.tree <- renderPlotly({
         # plotROCCurves(df.tree()$data, measures = list(fpr, tpr), diagonal = TRUE)
-        tt=ggplot(df.tree()$data)+geom_line(aes(x=fpr,y=tpr),color="blue")+theme_bw()
-        plotly_build(tt)
-    })
+     #   tt=ggplot(df.tree()$data)+geom_line(aes(x=fpr,y=tpr),color="blue")+theme_bw()
+      #  plotly_build(tt)
+    #})
     
     
     
@@ -385,33 +385,33 @@ shinyServer(function(input, output) {
     })
     
     
-    df <- reactive({ generateThreshVsPerfData(pred.svm(), measures = list(fpr, tpr, ppv, tnr,mmce))
-    })
+  #  df <- reactive({ generateThreshVsPerfData(pred.svm(), measures = list(fpr, tpr, ppv, tnr,mmce))
+   # })
     
     
-    output$graph1.svm <- renderPlotly({
+    #output$graph1.svm <- renderPlotly({
          #plotROCCurves(df(), measures = list(tpr, ppv), diagonal = FALSE)
-         plo1=ggplot(df()$data)+geom_line(aes(x=tpr,y=ppv),color="dark green")+theme_bw()+
-        xlab("True positive rate")+ylab("Positive predict rate")
-         plotly_build(plo1)
+     #    plo1=ggplot(df()$data)+geom_line(aes(x=tpr,y=ppv),color="dark green")+theme_bw()+
+      #  xlab("True positive rate")+ylab("Positive predict rate")
+       #  plotly_build(plo1)
         
-     })
+     #})
     
   
-    output$graph2.svm <- renderPlotly({
+    #output$graph2.svm <- renderPlotly({
         # plotROCCurves(df(), measures = list(tnr, tpr), diagonal = FALSE)
-        plo2=ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="dark green")+theme_bw()+
-            xlab("True negative rate")+ylab("True positive rate")
-        plotly_build(plo2)
+     #   plo2=ggplot(df()$data)+geom_line(aes(x=tnr,y=tpr),color="dark green")+theme_bw()+
+      #      xlab("True negative rate")+ylab("True positive rate")
+       # plotly_build(plo2)
     
-    })
+   # })
     
-     output$graph3.svm <- renderPlotly({
+     #output$graph3.svm <- renderPlotly({
     #     plotROCCurves(df(), measures = list(fpr, tpr), diagonal = TRUE)
-         plo3=ggplot(df()$data)+geom_line(aes(x=fpr,y=tpr),color="dark green")+theme_bw()+
-             xlab("false positive rate")+ylab("True positive rate")
-         plotly_build(plo3)
-    })
+      #   plo3=ggplot(df()$data)+geom_line(aes(x=fpr,y=tpr),color="dark green")+theme_bw()+
+       #      xlab("false positive rate")+ylab("True positive rate")
+        # plotly_build(plo3)
+    #})
     
     
     
@@ -482,29 +482,29 @@ shinyServer(function(input, output) {
     })
     
     
-    df.rf <- reactive({ generateThreshVsPerfData(pred.rf(),
-                                                 measures = list(fpr, tpr, ppv, tnr,mmce))
-    })
+    #df.rf <- reactive({ generateThreshVsPerfData(pred.rf(),
+     #                                            measures = list(fpr, tpr, ppv, tnr,mmce))
+    #})
     
     
-    output$graph1.rf <- renderPlotly({
+    #output$graph1.rf <- renderPlotly({
        # plotROCCurves(df.rf(), measures = list(tpr, ppv), diagonal = FALSE)
-        pp=ggplot(df.rf()$data)+geom_line(aes(x=tpr,y=ppv),color="blue")+theme_bw()
-        plotly_build(pp)
+     #   pp=ggplot(df.rf()$data)+geom_line(aes(x=tpr,y=ppv),color="blue")+theme_bw()
+      #  plotly_build(pp)
         
-    })
+    #})
     
-    output$graph2.rf <- renderPlotly({
+    #output$graph2.rf <- renderPlotly({
        # plotROCCurves(df.rf(), measures = list(tnr, tpr), diagonal = FALSE)
-       bbp= ggplot(df.rf()$data)+geom_line(aes(x=tnr,y=tpr),color="blue")+theme_bw()
-        plotly_build(bbp)
-    })
+     #  bbp= ggplot(df.rf()$data)+geom_line(aes(x=tnr,y=tpr),color="blue")+theme_bw()
+      #  plotly_build(bbp)
+    #})
     
-    output$graph3.rf <- renderPlotly({
+   # output$graph3.rf <- renderPlotly({
        # plotROCCurves(df.rf()$data, measures = list(fpr, tpr), diagonal = TRUE)
-        tt=ggplot(df.rf()$data)+geom_line(aes(x=fpr,y=tpr),color="blue")+theme_bw()
-        plotly_build(tt)
-    })
+    #    tt=ggplot(df.rf()$data)+geom_line(aes(x=fpr,y=tpr),color="blue")+theme_bw()
+     #   plotly_build(tt)
+    #})
     
     
     # benchmarking on smote data sets 

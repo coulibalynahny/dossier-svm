@@ -182,13 +182,13 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  verbatimTextOutput("roc.svm"),
                  
                  h4("Precision/Recall graph"),
-                 plotlyOutput("graph1.svm"),
+                 #plotlyOutput("graph1.svm"),
                  
                  h4("Sensitivity/Specificity graph"),
-                 plotlyOutput("graph2.svm"),
+                 #plotlyOutput("graph2.svm"),
                  
                  h4("Roc curve"),
-                 plotlyOutput("graph3.svm")
+                 #plotlyOutput("graph3.svm")
                  
         ),
         
@@ -209,13 +209,13 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  verbatimTextOutput("roc.lg"),
                  
                  h4("Precision/Recall graph"),
-                 plotlyOutput("graph1.lg"),
+                 #plotlyOutput("graph1.lg"),
                  
                  h4("Sensitivity/Specificity graph"),
-                 plotlyOutput("graph2.lg"),
+                 #plotlyOutput("graph2.lg"),
                  
-                 h4("Roc curve"),
-                 plotlyOutput("graph3.lg")
+                 h4("Roc curve")
+                 #plotlyOutput("graph3.lg")
                  
         ),
         # decision tree
@@ -239,13 +239,13 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  verbatimTextOutput("roc.tree"),
                  
                  h4("Precision/Recall graph"),
-                 plotlyOutput("graph1.tree"),
+                 #plotlyOutput("graph1.tree"),
                  
                  h4("Sensitivity/Specificity graph"),
-                 plotlyOutput("graph2.tree"),
+                 #plotlyOutput("graph2.tree"),
                  
-                 h4("Roc curve"),
-                 plotlyOutput("graph3.tree")
+                 h4("Roc curve")
+                 #plotlyOutput("graph3.tree")
                  
         ),
         
@@ -276,13 +276,13 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
                  verbatimTextOutput("roc.rf"),
                  
                  h4("Precision/Recall graph"),
-                 plotlyOutput("graph1.rf"),
+                 #plotlyOutput("graph1.rf"),
                  
                  h4("Sensitivity/Specificity graph"),
-                 plotlyOutput("graph2.rf"),
+                 #plotlyOutput("graph2.rf"),
                  
-                 h4("Roc curve"),
-                 plotlyOutput("graph3.rf")
+                 h4("Roc curve")
+                 #plotlyOutput("graph3.rf")
                  
         ),
       
