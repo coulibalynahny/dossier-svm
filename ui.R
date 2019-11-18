@@ -2,6 +2,7 @@
 
 library(shiny)
 library(shinythemes)
+library(ggplot2)
 library(plotly)
 
 # Define UI for application that draws a histogram
@@ -318,13 +319,13 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
         
              
              h4("Precision/Recall graph"),
-             plotlyOutput("graph1.compar"),
+            #plotOutput("graph1.compar"),
              
              h4("Sensitivity/Specificity graph"),
-             plotlyOutput("graph2.compar"),
+             #plotOutput("graph2.compar"),
              
              h4("Roc curve"),
-             plotlyOutput("graph3.compar")
+             #plotOutput("graph3.compar")
     )
           
              
