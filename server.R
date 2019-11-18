@@ -1,5 +1,6 @@
 # SERVER
 
+library(plotly)
 library(shiny)
 library(mlr)
 library(rpart)
@@ -12,7 +13,7 @@ library(randomForest)
 library(data.table)
 library(DT)
 library(ggplot2)
-library(plotly)
+
 
 # chemin d'acces C:\Users\nahny\Documents\GitHub
 

@@ -1,9 +1,9 @@
 # UI
-
+library(plotly)
 library(shiny)
 library(shinythemes)
 library(ggplot2)
-library(plotly)
+
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -84,7 +84,7 @@ Amount and time have been centered and reduced(mean equals 0) for all variables.
            h4("Features selection"),
            "Entropy-based Filters: Algorithms that find ranks of importance of 
            discrete attributes, basing on their entropy with a continous class attribute",
-           plotlyOutput("filtre")
+           #plotlyOutput("filtre")
            
            
         ),
