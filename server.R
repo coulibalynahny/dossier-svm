@@ -1,5 +1,6 @@
 # SERVER
 
+#library(plotly)
 library(shiny)
 library(mlr)
 library(rpart)
@@ -12,7 +13,7 @@ library(randomForest)
 library(data.table)
 library(DT)
 library(ggplot2)
-library(plotly)
+
 
 # chemin d'acces C:\Users\nahny\Documents\GitHub
 
@@ -109,10 +110,10 @@ shinyServer(function(input, output) {
                                       method="FSelectorRcpp_information.gain")
     })
     
-    output$filtre <- renderPlotly({ 
-        des=mlr::plotFilterValues(filter(),n.show=10)
-        plotly_build(des)
-    }) 
+    #output$filtre <- renderPlotly({ 
+     #   des=mlr::plotFilterValues(filter(),n.show=10)
+      #  plotly_build(des)
+    #}) 
     
     
     
@@ -570,21 +571,21 @@ shinyServer(function(input, output) {
       measures = list(fpr, tpr, ppv, tnr,mmce))
     })
     
-    output$graph1.compar <- renderPlotly({
-      pc1= plotROCCurves(compar(), measures = list(tpr, ppv), diagonal = FALSE)
-      plotly_build(pc1)
+    #output$graph1.compar <- renderPlotly({
+     # pc1= plotROCCurves(compar(), measures = list(tpr, ppv), diagonal = FALSE)
+     # plotly_build(pc1)
 
-    })
-    output$graph2.compar <- renderPlotly({
-      pc2=plotROCCurves(compar(), measures = list(tnr, tpr), diagonal = FALSE)
-      plotly_build(pc2)
+  #  })
+   # output$graph2.compar <- renderPlotly({
+    #  pc2=plotROCCurves(compar(), measures = list(tnr, tpr), diagonal = FALSE)
+     # plotly_build(pc2)
       
-    })
-    output$graph3.compar <- renderPlotly({
-      pc3=plotROCCurves(compar(), measures = list(fpr, tpr), diagonal = TRUE)
-      plotly_build(pc3)
-    
-    })
+  #  })
+   # output$graph3.compar <- renderPlotly({
+    #  pc3=plotROCCurves(compar(), measures = list(fpr, tpr), diagonal = TRUE)
+    #  plotly_build(pc3)
+     
+    #})
     
     
     

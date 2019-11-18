@@ -30,7 +30,7 @@ r_packages:
   - DT
   - shinythemes
   - ggplot2
-  - plotly
+  
   
 script:
   - R -f deploy.R
