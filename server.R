@@ -28,7 +28,7 @@ levels(DT$Class)[2] <- "Fraud"
 table_prop<-rbind(table(DT$Class),prop.table(table(DT$Class)))
 row.names(table_prop)<-c("Number","Proportion (in %)")
 table_prop[2,]<-round(table_prop[2,],4)*100
-tableex=DT[1:100,c(1,2,3,4,5,6,30,31)]
+tableex=DT[1:10,c(1,2,3,4,5,6,30,31)]
 stat=summary(DT[,-31])
 
 
