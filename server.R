@@ -1,6 +1,6 @@
 # SERVER
 
-library(plotly)
+#library(plotly)
 library(shiny)
 library(mlr)
 library(rpart)
@@ -110,10 +110,10 @@ shinyServer(function(input, output) {
                                       method="FSelectorRcpp_information.gain")
     })
     
-    output$filtre <- renderPlotly({ 
-        des=mlr::plotFilterValues(filter(),n.show=10)
-        plotly_build(des)
-    }) 
+    #output$filtre <- renderPlotly({ 
+     #   des=mlr::plotFilterValues(filter(),n.show=10)
+      #  plotly_build(des)
+    #}) 
     
     
     
