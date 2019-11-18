@@ -1,5 +1,5 @@
 # UI
-library(plotly)
+#library(plotly)
 library(shiny)
 library(shinythemes)
 library(ggplot2)
