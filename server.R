@@ -508,51 +508,51 @@ shinyServer(function(input, output) {
     
     
     # benchmarking on smote data sets 
-    rdesc=reactive({ makeResampleDesc("CV", iters = input$k, stratify = TRUE)
-    })
+   # rdesc=reactive({ makeResampleDesc("CV", iters = input$k, stratify = TRUE)
+   # })
     
-    bmr=reactive({ 
-        ms = list(mlr::auc, mmce)
-        lrns = list(makeLearner("classif.svm", predict.type = "prob"),
-                    makeLearner("classif.rpart", predict.type = "prob"),
-                    makeLearner("classif.randomForest", predict.type = "prob"),
-                    makeLearner("classif.logreg", predict.type = "prob")
-        )
-        bmr = benchmark(lrns, train.task(), rdesc(), measures = ms, models = TRUE)
-        return(bmr)
-    })
+    #bmr=reactive({ 
+     #   ms = list(mlr::auc, mmce)
+      #  lrns = list(makeLearner("classif.svm", predict.type = "prob"),
+       #             makeLearner("classif.rpart", predict.type = "prob"),
+        #            makeLearner("classif.randomForest", predict.type = "prob"),
+         #           makeLearner("classif.logreg", predict.type = "prob")
+        #)
+        #bmr = benchmark(lrns, train.task(), rdesc(), measures = ms, models = TRUE)
+        #return(bmr)
+   # })
     
-    output$bmr1 <- renderPrint({
-        bmr()
-    })
+    #output$bmr1 <- renderPrint({
+  #      bmr()
+   # })
     
-    df.bmr <- reactive({ generateThreshVsPerfData(bmr(),
-                                                  measures = list(fpr, tpr, ppv, tnr,mmce))
-    })
+    #df.bmr <- reactive({ generateThreshVsPerfData(bmr(),
+     #                                             measures = list(fpr, tpr, ppv, tnr,mmce))
+    #})
     
     
-    output$graph1.bmr <- renderPlotly({
-       ta= plotROCCurves(df.bmr(), measures = list(tpr, ppv), diagonal = FALSE)
-       plotly_build(ta)
-        #ggplot(df.bmr()$data)+geom_line(aes(x=tpr,y=ppv))+theme_bw()
-    })
+    #output$graph1.bmr <- renderPlotly({
+     #  ta= plotROCCurves(df.bmr(), measures = list(tpr, ppv), diagonal = FALSE)
+     #  plotly_build(ta)
+     #   #ggplot(df.bmr()$data)+geom_line(aes(x=tpr,y=ppv))+theme_bw()
+    #})
     
-    output$graph2.bmr <- renderPlotly({
-        dd=plotROCCurves(df.bmr(), measures = list(tnr, tpr), diagonal = FALSE)
-        plotly_build(dd)
+   # output$graph2.bmr <- renderPlotly({
+    #    dd=plotROCCurves(df.bmr(), measures = list(tnr, tpr), diagonal = FALSE)
+     #   plotly_build(dd)
         #ggplot(df.bmr()$data)+geom_line(aes(x=tnr,y=tpr))+theme_bw()
-    })
+    # })
     
-    output$graph3.bmr <- renderPlotly({
-        ti=plotROCCurves(df.bmr(), measures = list(fpr, tpr), diagonal = TRUE)
-        plotly_build(ti)
+    # output$graph3.bmr <- renderPlotly({
+      #  ti=plotROCCurves(df.bmr(), measures = list(fpr, tpr), diagonal = TRUE)
+       # plotly_build(ti)
         #ggplot(df.bmr()$data)+geom_line(aes(x=fpr,y=tpr))+theme_bw()
-    })
+  #  })
     
-    output$bmrplot <- renderPlot({
-        plotBMRBoxplots(bmr(), measure = mmce, order.lrn = getBMRLearnerIds(bmr()))
+   # output$bmrplot <- renderPlot({
+    #    plotBMRBoxplots(bmr(), measure = mmce, order.lrn = getBMRLearnerIds(bmr()))
         #plot_ly(bmr()$data, type = "box")
-    })
+    # })
     # 
     # output$bmri <- renderPlot({
     #     plot(bmri())
@@ -576,12 +576,12 @@ shinyServer(function(input, output) {
 
     })
     output$graph2.compar <- renderPlotly({
-      pc2=plotROCCurves(df.bmr(), measures = list(tnr, tpr), diagonal = FALSE)
+      pc2=plotROCCurves(compar(), measures = list(tnr, tpr), diagonal = FALSE)
       plotly_build(pc2)
       
     })
     output$graph3.compar <- renderPlotly({
-      pc3=plotROCCurves(df.bmr(), measures = list(fpr, tpr), diagonal = TRUE)
+      pc3=plotROCCurves(compar(), measures = list(fpr, tpr), diagonal = TRUE)
       plotly_build(pc3)
     
     })

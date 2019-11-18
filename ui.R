@@ -2,6 +2,7 @@
 
 library(shiny)
 library(shinythemes)
+library(plotly)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -286,29 +287,29 @@ classified but below the margin if they are between 0 and 1, or even poorly clas
         ),
       
         # model comparision
-        tabPanel("VII.Model Comparison using cross validation in training set",
+       # tabPanel("VII.Model Comparison using cross validation in training set",
+        #         
+         #        h1("VII.Comparison of different models"),
+          #       
+           #      h4("Resampling using the k-fold method"),
+            #     sliderInput("k","Choose your K ",0,10,value=5,round = T),
+             #    verbatimTextOutput("bmr1"),
+              #   
+               #  h4("Precision/Recall graph"),
+                # plotlyOutput("graph1.bmr"),
                  
-                 h1("VII.Comparison of different models"),
+                # h4("Sensitivity/Specificity graph"),
+               #  plotlyOutput("graph2.bmr"),
                  
-                 h4("Resampling using the k-fold method"),
-                 sliderInput("k","Choose your K ",0,10,value=5,round = T),
-                 verbatimTextOutput("bmr1"),
-                 
-                 h4("Precision/Recall graph"),
-                 plotlyOutput("graph1.bmr"),
-                 
-                 h4("Sensitivity/Specificity graph"),
-                 plotlyOutput("graph2.bmr"),
-                 
-                 h4("Roc curve"),
-                 plotlyOutput("graph3.bmr"),
+                # h4("Roc curve"),
+                # plotlyOutput("graph3.bmr"),
               
                  
-                 h4("Distribution of performance values across resampling iterations for
-                    one performance measure and for all learners"),
-                 plotOutput("bmrplot")
+                 #h4("Distribution of performance values across resampling iterations for
+                  #  one performance measure and for all learners"),
+                 #plotOutput("bmrplot")
                  
-        ),
+       # ),
     # model comparision
     tabPanel("VIII.Model Comparison on test set",
              
